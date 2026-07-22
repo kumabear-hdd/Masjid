@@ -18,18 +18,18 @@ Website publik Masjid Assalam dengan **sedekah online** (QRIS / transfer bank ma
 - Update saldo kas & target bulanan
 
 ## Stack
-- Frontend: HTML, CSS, vanilla JS (UI existing dipertahankan)
+- Frontend: HTML, CSS, vanilla JS
 - Backend: Node.js + Express
 - Database: SQLite (`better-sqlite3`)
 - Auth: JWT di cookie HttpOnly
 
-## Cara menjalankan
+## Cara menjalankan (lokal)
 
 ```bash
 cd "F:\Masjid Project"
 npm install
-# pastikan file .env ada (salin dari .env.example jika perlu)
-npm run seed
+# salin .env.example → .env lalu sesuaikan
+npm run seed   # opsional (server juga auto-bootstrap saat start)
 npm start
 ```
 
@@ -41,9 +41,9 @@ Buka: **http://localhost:3000**
 | Email | `admin@assalam.com` |
 | Password | `assalam123` |
 
-**Ganti password di produksi** lewat `.env` lalu jalankan ulang `npm run seed` (hanya membuat admin jika belum ada — untuk ganti password, hapus baris admin di DB atau update manual).
+**Ganti password di produksi** lewat environment variables sebelum deploy pertama (admin hanya dibuat jika belum ada).
 
-### Variabel lingkungan (`.env`)
+### Variabel lingkungan
 
 ```
 PORT=3000
@@ -55,6 +55,10 @@ BANK_NAME=BSI
 BANK_ACCOUNT=7123456789
 BANK_HOLDER=Masjid Assalam
 NODE_ENV=development
+
+# Opsional (disk persisten di hosting):
+# DATA_DIR=/var/data
+# UPLOADS_DIR=/var/data/uploads
 ```
 
 ## Alur sedekah
@@ -72,11 +76,15 @@ NODE_ENV=development
 ├── server/
 │   ├── index.js
 │   ├── db.js
+│   ├── paths.js
+│   ├── bootstrap.js
 │   ├── auth.js
 │   ├── seed.js
-│   ├── uploads/      # Bukti transfer
+│   ├── uploads/      # Bukti transfer (lokal)
 │   └── routes/
 ├── data/             # masjid.db (dibuat otomatis)
+├── render.yaml       # Blueprint Render
+├── Procfile
 ├── package.json
 └── .env
 ```
@@ -96,15 +104,48 @@ NODE_ENV=development
 | GET | `/api/donations` | List donasi (admin) |
 | PATCH | `/api/donations/:id/status` | Verifikasi (admin) |
 | GET/PUT | `/api/kas` | Baca / update kas |
+| GET | `/api/health` | Health check |
+
+## Deploy ke Render (disarankan)
+
+Aplikasi ini butuh **Node.js long-running** + filesystem untuk SQLite & upload — **bukan** Netlify static.
+
+### Opsi A — Blueprint (paling cepat)
+
+1. Push kode ke GitHub (`kumabear-hdd/Masjid`)
+2. Buka [https://dashboard.render.com](https://dashboard.render.com) → **New** → **Blueprint**
+3. Hubungkan repo **Masjid** (ada `render.yaml`)
+4. Isi env `ADMIN_PASSWORD` (dan ganti email bank jika perlu)
+5. Deploy → tunggu build → buka URL `https://….onrender.com`
+
+### Opsi B — Web Service manual
+
+1. **New** → **Web Service** → pilih repo Masjid
+2. Runtime: **Node**
+3. Build: `npm install`
+4. Start: `npm start`
+5. Health check path: `/api/health`
+6. Environment:
+   - `NODE_ENV=production`
+   - `SESSION_SECRET` = string acak panjang
+   - `ADMIN_EMAIL` / `ADMIN_PASSWORD` / `ADMIN_NAME`
+   - `BANK_NAME` / `BANK_ACCOUNT` / `BANK_HOLDER`
+7. (Disarankan, plan berbayar) **Disk** mount ke `/var/data`, lalu set:
+   - `DATA_DIR=/var/data`
+   - `UPLOADS_DIR=/var/data/uploads`  
+   Tanpa disk, SQLite & bukti transfer **hilang** setiap redeploy (free tier ephemeral).
+
+### Setelah live
+- Publik: `https://YOUR-APP.onrender.com`
+- Admin: `https://YOUR-APP.onrender.com/login.html`
+- Free tier Render **sleep** setelah idle ~15 menit (request pertama bisa lambat).
+
+### Alternatif host
+- **Railway** / **Fly.io** / VPS: `npm install` → set env → `npm start` (listen `0.0.0.0:$PORT`)
+- **Netlify**: tidak cocok untuk Express + SQLite + upload
 
 ## Catatan fase 1
 - Pembayaran **manual** (bukan Midtrans/Xendit). Gateway otomatis bisa ditambah nanti.
 - Tidak ada login jamaah.
 - Upload bukti max 3MB, format gambar.
-
-## Deploy singkat
-1. Install Node 18+ di VPS/hosting
-2. Upload project, `npm install --production`
-3. Set `.env` production (`SESSION_SECRET` kuat, `NODE_ENV=production`)
-4. `npm run seed && npm start` (atau PM2: `pm2 start server/index.js --name masjid`)
-5. Reverse proxy Nginx ke port 3000 + HTTPS
+- Admin auto-dibuat saat start jika belum ada (dari env).

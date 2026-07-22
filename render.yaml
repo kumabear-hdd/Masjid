@@ -1,0 +1,31 @@
+# Render Blueprint — https://render.com/docs/blueprint-spec
+# Deploy: Dashboard → New → Blueprint → pilih repo Masjid
+services:
+  - type: web
+    name: masjid-assalam
+    runtime: node
+    plan: free
+    region: singapore
+    buildCommand: npm install
+    startCommand: npm start
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: SESSION_SECRET
+        generateValue: true
+      - key: ADMIN_EMAIL
+        value: admin@assalam.com
+      - key: ADMIN_PASSWORD
+        sync: false
+      - key: ADMIN_NAME
+        value: Administrator Masjid
+      - key: BANK_NAME
+        value: BSI
+      - key: BANK_ACCOUNT
+        value: "7123456789"
+      - key: BANK_HOLDER
+        value: Masjid Assalam
+      # Opsional: path disk persisten Render (set setelah attach disk)
+      # - key: DATA_DIR
+      #   value: /var/data
