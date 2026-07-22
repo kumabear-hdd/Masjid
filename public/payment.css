@@ -1,0 +1,80 @@
+.payment-main{padding:40px 0 80px;}
+.payment-grid{
+  display:grid;
+  grid-template-columns:1.1fr .9fr;
+  gap:24px;
+  max-width:1000px;
+  margin:0 auto;
+}
+@media (max-width:900px){
+  .payment-grid{grid-template-columns:1fr;}
+}
+.payment-card h3{margin-top:0;}
+.pay-hint{color:var(--on-surface-variant);font-size:14px;margin:0 0 16px;}
+.pay-code{
+  display:inline-block;
+  background:rgba(0,105,71,.08);
+  color:var(--primary);
+  font-weight:700;
+  padding:8px 14px;
+  border-radius:8px;
+  letter-spacing:.04em;
+  margin:8px 0 16px;
+}
+.pay-amount{
+  font-size:32px;
+  font-weight:800;
+  color:var(--primary);
+  margin:8px 0 20px;
+}
+.pay-box{
+  background:var(--surface-container-low);
+  border:1px solid var(--outline-variant);
+  border-radius:12px;
+  padding:20px;
+  margin-bottom:16px;
+}
+.pay-box h4{margin:0 0 12px;font-size:16px;}
+.pay-row{display:flex;justify-content:space-between;gap:12px;padding:8px 0;border-bottom:1px dashed var(--outline-variant);font-size:14px;}
+.pay-row:last-child{border-bottom:none;}
+.pay-row .val{font-weight:700;text-align:right;}
+.qris-wrap{text-align:center;}
+.qris-wrap img{max-width:260px;width:100%;border-radius:12px;border:1px solid var(--outline-variant);}
+.copy-btn{
+  border:none;background:var(--primary);color:#fff;
+  border-radius:6px;padding:4px 10px;font-size:12px;font-weight:600;cursor:pointer;
+}
+.pay-divider{border:none;border-top:1px solid var(--outline-variant);margin:28px 0;}
+.btn-outline-pay{
+  width:100%;
+  background:transparent;
+  border:1px solid var(--outline-variant);
+  color:var(--on-surface);
+  padding:12px;
+  border-radius:8px;
+  font-weight:600;
+  cursor:pointer;
+  font-family:inherit;
+}
+.btn-outline-pay:hover{background:var(--surface-container-low);}
+.proof-status{
+  margin-top:16px;
+  padding:12px 14px;
+  border-radius:8px;
+  background:rgba(0,133,91,.1);
+  color:var(--primary);
+  font-size:14px;
+  font-weight:600;
+}
+.status-pill{
+  display:inline-block;
+  padding:4px 12px;
+  border-radius:999px;
+  font-size:12px;
+  font-weight:700;
+}
+.status-pill.pending{background:rgba(254,214,91,.35);color:#735c00;}
+.status-pill.verified{background:rgba(0,133,91,.15);color:var(--primary);}
+.status-pill.rejected{background:rgba(186,26,26,.12);color:#ba1a1a;}
+.loading-text{color:var(--on-surface-variant);}
+.steps{margin:0;padding-left:18px;color:var(--on-surface-variant);font-size:14px;line-height:1.7;}

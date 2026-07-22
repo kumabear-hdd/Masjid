@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Dashboard - Masjid Assalam</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="admin.css">
+</head>
+<body>
+
+<div class="app">
+  <aside class="sidebar">
+    <div class="sidebar-header">
+      <h1>Masjid Assalam</h1>
+      <p>Admin Control Center</p>
+    </div>
+    <nav class="sidebar-nav">
+      <a href="#dashboard" class="sidebar-link active" data-section="dashboard">
+        <span class="material-symbols-outlined fill">dashboard</span>
+        Dashboard
+      </a>
+      <a href="#donations" class="sidebar-link" data-section="donations">
+        <span class="material-symbols-outlined">volunteer_activism</span>
+        Donasi
+      </a>
+      <a href="#schedules" class="sidebar-link" data-section="schedules">
+        <span class="material-symbols-outlined">event_note</span>
+        Jadwal Kegiatan
+      </a>
+      <a href="#kas" class="sidebar-link" data-section="kas">
+        <span class="material-symbols-outlined">account_balance_wallet</span>
+        Kas
+      </a>
+      <a href="index.html" class="sidebar-link" target="_blank">
+        <span class="material-symbols-outlined">public</span>
+        Lihat Website
+      </a>
+    </nav>
+    <div class="sidebar-footer">
+      <a href="#" class="sidebar-link logout" id="logoutBtn">
+        <span class="material-symbols-outlined">logout</span>
+        Logout
+      </a>
+    </div>
+  </aside>
+
+  <main class="main">
+    <header class="topbar">
+      <div class="topbar-left">
+        <button class="menu-btn" type="button" id="menuBtn">
+          <span class="material-symbols-outlined">menu</span>
+        </button>
+        <h2 id="pageTitle">Overview Dashboard</h2>
+      </div>
+      <div class="topbar-right">
+        <div class="user-info">
+          <div class="user-text">
+            <p class="user-name" id="adminName">Admin</p>
+            <p class="user-role">Administrator</p>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <div class="content">
+      <!-- Dashboard -->
+      <section id="section-dashboard" class="admin-section">
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-top">
+              <div class="stat-icon secondary">
+                <span class="material-symbols-outlined">payments</span>
+              </div>
+              <span class="stat-badge outline">Pending</span>
+            </div>
+            <p class="stat-label">Donasi Menunggu</p>
+            <h3 class="stat-value" id="statPending">0</h3>
+          </div>
+          <div class="stat-card">
+            <div class="stat-top">
+              <div class="stat-icon primary">
+                <span class="material-symbols-outlined">verified</span>
+              </div>
+              <span class="stat-badge primary">Bulan ini</span>
+            </div>
+            <p class="stat-label">Donasi Terverifikasi</p>
+            <h3 class="stat-value" id="statVerifiedTotal">Rp 0</h3>
+          </div>
+          <div class="stat-card">
+            <div class="stat-top">
+              <div class="stat-icon tertiary">
+                <span class="material-symbols-outlined">event</span>
+              </div>
+              <span class="stat-badge tertiary">Aktif</span>
+            </div>
+            <p class="stat-label">Jadwal Akan Datang</p>
+            <h3 class="stat-value" id="statSchedules">0</h3>
+          </div>
+          <div class="stat-card">
+            <div class="stat-top">
+              <div class="stat-icon primary">
+                <span class="material-symbols-outlined">account_balance_wallet</span>
+              </div>
+              <span class="stat-badge outline">Kas</span>
+            </div>
+            <p class="stat-label">Saldo Kas</p>
+            <h3 class="stat-value" id="statSaldo">Rp 0</h3>
+          </div>
+        </div>
+
+        <div class="table-card" style="margin-top:24px;">
+          <div class="table-header">
+            <h4>Donasi Terbaru</h4>
+            <button class="link-btn" type="button" data-goto="donations">Lihat Semua</button>
+          </div>
+          <div class="table-wrapper">
+            <table>
+              <thead>
+                <tr>
+                  <th>Kode</th>
+                  <th>Donatur</th>
+                  <th>Jumlah</th>
+                  <th>Metode</th>
+                  <th>Status</th>
+                  <th class="center">Aksi</th>
+                </tr>
+              </thead>
+              <tbody id="dashboardDonationsBody">
+                <tr><td colspan="6">Memuat...</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- Donations -->
+      <section id="section-donations" class="admin-section" hidden>
+        <div class="table-card">
+          <div class="table-header">
+            <h4>Kelola Donasi Sedekah</h4>
+            <div class="filter-row">
+              <select id="donationFilter" class="admin-select">
+                <option value="">Semua Status</option>
+                <option value="pending">Pending</option>
+                <option value="verified">Verified</option>
+                <option value="rejected">Ditolak</option>
+              </select>
+            </div>
+          </div>
+          <div class="table-wrapper">
+            <table>
+              <thead>
+                <tr>
+                  <th>Kode</th>
+                  <th>Donatur</th>
+                  <th>WA</th>
+                  <th>Jumlah</th>
+                  <th>Metode</th>
+                  <th>Bukti</th>
+                  <th>Status</th>
+                  <th class="center">Aksi</th>
+                </tr>
+              </thead>
+              <tbody id="donationsBody">
+                <tr><td colspan="8">Memuat...</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- Schedules -->
+      <section id="section-schedules" class="admin-section" hidden>
+        <div class="admin-schedules-grid">
+          <div class="table-card schedules-list-card">
+            <div class="table-header">
+              <h4>Daftar Jadwal Kegiatan</h4>
+            </div>
+            <div class="table-wrapper">
+              <table class="schedules-table">
+                <thead>
+                  <tr>
+                    <th>Judul</th>
+                    <th>Kategori</th>
+                    <th>Tanggal</th>
+                    <th>Waktu</th>
+                    <th>Status</th>
+                    <th class="center">Aksi</th>
+                  </tr>
+                </thead>
+                <tbody id="schedulesBody">
+                  <tr><td colspan="6">Memuat...</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="profile-card schedules-form-card">
+            <h4 id="scheduleFormTitle">Tambah Jadwal</h4>
+            <form id="scheduleForm">
+              <input type="hidden" id="scheduleId">
+              <div class="field-group">
+                <label for="scheduleTitle">Judul Kegiatan</label>
+                <input type="text" id="scheduleTitle" required placeholder="Contoh: Kajian Ahad Pagi">
+              </div>
+              <div class="field-group">
+                <label for="scheduleCategory">Kategori</label>
+                <select id="scheduleCategory" required>
+                  <option value="kajian">Kajian</option>
+                  <option value="sosial">Sosial</option>
+                  <option value="renovasi">Renovasi</option>
+                  <option value="ramadhan">Ramadhan</option>
+                  <option value="lainnya">Lainnya</option>
+                </select>
+              </div>
+              <div class="field-group">
+                <label for="scheduleDate">Tanggal</label>
+                <input type="date" id="scheduleDate" required>
+              </div>
+              <div class="field-group">
+                <label for="scheduleTime">Waktu</label>
+                <input type="time" id="scheduleTime">
+              </div>
+              <div class="field-group">
+                <label for="scheduleLocation">Lokasi</label>
+                <input type="text" id="scheduleLocation" placeholder="Masjid Assalam">
+              </div>
+              <div class="field-group">
+                <label for="scheduleStatus">Status</label>
+                <select id="scheduleStatus">
+                  <option value="upcoming">Akan Datang</option>
+                  <option value="completed">Selesai</option>
+                </select>
+              </div>
+              <div class="field-group">
+                <label for="scheduleDesc">Deskripsi</label>
+                <textarea id="scheduleDesc" rows="3" placeholder="Keterangan kegiatan..."></textarea>
+              </div>
+              <div class="form-actions">
+                <button type="submit" class="save-btn" id="scheduleSubmitBtn">Simpan Jadwal</button>
+                <button type="button" class="btn-cancel" id="scheduleResetBtn" hidden>Batal Edit</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </section>
+
+      <!-- Kas -->
+      <section id="section-kas" class="admin-section" hidden>
+        <div class="profile-card" style="max-width:480px;">
+          <h4>Update Saldo Kas</h4>
+          <p class="form-hint">Saldo ini ditampilkan di halaman publik Kas & Beranda.</p>
+          <form id="kasForm">
+            <div class="field-group">
+              <label for="kasSaldo">Saldo Kas (Rp)</label>
+              <input type="number" id="kasSaldo" min="0" step="1" required>
+            </div>
+            <div class="field-group">
+              <label for="kasTarget">Target Donasi Bulanan (Rp)</label>
+              <input type="number" id="kasTarget" min="0" step="1" required>
+            </div>
+            <button type="submit" class="save-btn">Simpan Kas</button>
+          </form>
+        </div>
+      </section>
+    </div>
+  </main>
+</div>
+
+<!-- Donation detail modal -->
+<div class="modal-overlay" id="donationModal" hidden>
+  <div class="modal-card">
+    <div class="modal-header">
+      <h3>Detail Donasi</h3>
+      <button type="button" class="modal-close" id="closeDonationModal">&times;</button>
+    </div>
+    <div class="modal-body" id="donationModalBody"></div>
+    <div class="modal-footer" id="donationModalFooter"></div>
+  </div>
+</div>
+
+<script src="api.js"></script>
+<script src="admin.js"></script>
+</body>
+</html>

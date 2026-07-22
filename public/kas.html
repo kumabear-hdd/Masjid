@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Laporan Kas - Masjid Assalam</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script src="config.js"></script>
+<link rel="stylesheet" href="kas.css"/>
+</head>
+<body class="text-on-surface">
+
+<!-- TopNavBar -->
+<header class="bg-surface dark:bg-surface-dim border-b border-outline-variant dark:border-outline sticky top-0 z-50">
+  <nav class="flex justify-between items-center w-full px-margin-desktop max-w-container-max mx-auto h-20">
+    <div class="font-headline-sm text-headline-sm font-bold text-primary dark:text-inverse-primary">Masjid Assalam</div>
+    <div class="hidden md:flex items-center gap-8">
+      <a class="text-on-surface-variant hover:text-primary transition-colors font-label-md text-label-md" href="index.html">Beranda</a>
+      <a class="text-on-surface-variant hover:text-primary transition-colors font-label-md text-label-md" href="profil.html">Profil</a>
+      <a class="text-primary font-bold border-b-2 border-primary pb-1 font-label-md text-label-md" href="kas.html">Kas</a>
+      <a class="text-on-surface-variant hover:text-primary transition-colors font-label-md text-label-md" href="program.html">Program</a>
+      <a class="text-on-surface-variant hover:text-primary transition-colors font-label-md text-label-md" href="kontak.html">Kontak</a>
+      <a href="sedekah.html" class="bg-primary text-on-primary px-6 py-2 rounded-lg font-label-md text-label-md hover:opacity-90 transition-all active:scale-95 duration-150" style="text-decoration:none">
+        Sedekah Sekarang
+      </a>
+    </div>
+    <button class="md:hidden text-primary" id="menuBtn">
+      <span class="material-symbols-outlined">menu</span>
+    </button>
+  </nav>
+  <div class="hidden flex-col gap-4 px-margin-mobile py-4 bg-surface border-t border-outline-variant" id="mobileMenu">
+    <a class="font-label-md text-label-md text-primary font-bold" href="index.html">Beranda</a>
+    <a class="font-label-md text-label-md text-on-surface-variant" href="profil.html">Profil</a>
+    <a class="font-label-md text-label-md text-primary font-bold" href="kas.html">Kas</a>
+    <a class="font-label-md text-label-md text-on-surface-variant" href="program.html">Program</a>
+    <a class="font-label-md text-label-md text-on-surface-variant" href="kontak.html">Kontak</a>
+    <a href="sedekah.html" class="bg-primary text-on-primary px-6 py-2 rounded-lg font-label-md text-label-md w-full text-center" style="text-decoration:none;display:block">Sedekah Sekarang</a>
+  </div>
+</header>
+
+<!-- TopAppBar (Page Header) -->
+<section class="bg-gradient-to-r from-primary-container to-surface py-12">
+  <div class="flex flex-col justify-center px-margin-desktop max-w-container-max mx-auto">
+    <div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
+      <div>
+        <a class="flex items-center gap-2 text-on-primary-container/80 mb-2 hover:underline" href="index.html">
+          <span class="material-symbols-outlined text-sm">arrow_back</span>
+          <span class="font-label-md text-label-md">Kembali ke Beranda</span>
+        </a>
+        <h1 class="font-headline-lg text-headline-lg text-on-primary-container">Laporan Kas Masjid</h1>
+        <p class="text-on-primary-container/80 font-body-md text-body-md mt-2 max-w-2xl">Transparansi penuh atas amanah umat. Kami menyajikan data keuangan secara terbuka demi menjaga kepercayaan jamaah.</p>
+      </div>
+      <button class="flex items-center gap-2 bg-secondary-container text-on-secondary-container px-6 py-3 rounded-lg font-label-md text-label-md hover:bg-secondary-fixed transition-all shadow-sm">
+        <span class="material-symbols-outlined">download</span>
+        Unduh PDF Laporan Bulanan
+      </button>
+    </div>
+  </div>
+</section>
+
+<main class="max-w-container-max mx-auto px-margin-desktop py-stack-lg relative">
+  <div class="absolute inset-0 islamic-pattern pointer-events-none"></div>
+
+  <!-- Summary Dashboard (Bento Grid) -->
+  <div class="grid grid-cols-1 md:grid-cols-12 gap-gutter mb-stack-lg relative z-10">
+    <div class="md:col-span-4 bg-surface-container-lowest border border-outline-variant p-stack-md rounded-xl shadow-card">
+      <div class="flex items-center gap-3 mb-4">
+        <div class="w-10 h-10 rounded-full bg-primary-fixed flex items-center justify-center text-primary">
+          <span class="material-symbols-outlined">account_balance_wallet</span>
+        </div>
+        <span class="font-label-md text-label-md text-on-surface-variant">Saldo Saat Ini</span>
+      </div>
+      <h2 class="font-headline-md text-headline-md text-on-surface" id="kasSaldoPublic">Rp 0</h2>
+      <p class="text-primary font-label-sm text-label-sm mt-2 flex items-center gap-1">
+        <span class="material-symbols-outlined text-sm">trending_up</span> Saldo real-time dari admin
+      </p>
+    </div>
+
+    <div class="md:col-span-4 bg-surface-container-lowest border border-outline-variant p-stack-md rounded-xl shadow-card">
+      <div class="flex items-center gap-3 mb-4">
+        <div class="w-10 h-10 rounded-full bg-primary-container/10 flex items-center justify-center text-primary">
+          <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">add_circle</span>
+        </div>
+        <span class="font-label-md text-label-md text-on-surface-variant">Total Pemasukan (Bulan Ini)</span>
+      </div>
+      <h2 class="font-headline-md text-headline-md text-primary" id="kasIncomePublic">Rp 0</h2>
+      <div class="w-full bg-surface-container h-1.5 rounded-full mt-4">
+        <div class="bg-primary h-full rounded-full" id="kasTargetBar" style="width:0%"></div>
+      </div>
+      <p class="text-on-surface-variant font-label-sm text-label-sm mt-2" id="kasTargetPct">0% dari target operasional</p>
+    </div>
+
+    <div class="md:col-span-4 bg-surface-container-lowest border border-outline-variant p-stack-md rounded-xl shadow-card">
+      <div class="flex items-center gap-3 mb-4">
+        <div class="w-10 h-10 rounded-full bg-error-container/20 flex items-center justify-center text-error">
+          <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">remove_circle</span>
+        </div>
+        <span class="font-label-md text-label-md text-on-surface-variant">Total Pengeluaran (Bulan Ini)</span>
+      </div>
+      <h2 class="font-headline-md text-headline-md text-error">Rp 18.750.000</h2>
+      <p class="text-on-surface-variant font-label-sm text-label-sm mt-2">Operasional &amp; Gaji Marbot</p>
+    </div>
+  </div>
+
+  <!-- Charts & Analysis Section -->
+  <div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter mb-stack-lg relative z-10">
+    <div class="lg:col-span-8 bg-surface-container-lowest border border-outline-variant p-stack-md rounded-xl">
+      <div class="flex justify-between items-center mb-6">
+        <h3 class="font-headline-sm text-headline-sm text-on-surface">Tren Keuangan 6 Bulan Terakhir</h3>
+        <div class="flex gap-2">
+          <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full border border-outline-variant text-label-sm font-label-sm text-on-surface-variant">
+            <span class="w-2 h-2 rounded-full bg-primary"></span> Pemasukan
+          </span>
+          <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full border border-outline-variant text-label-sm font-label-sm text-on-surface-variant">
+            <span class="w-2 h-2 rounded-full bg-error"></span> Pengeluaran
+          </span>
+        </div>
+      </div>
+      <!-- Simplified Visual Chart using Divs -->
+      <div class="h-64 flex items-end gap-4 px-4 border-l border-b border-outline-variant pt-8">
+        <div class="flex-1 flex flex-col justify-end gap-1 h-full">
+          <div class="bg-primary w-full h-[60%] rounded-t-sm" title="Pemasukan Jan"></div>
+          <div class="bg-error w-full h-[30%] rounded-t-sm" title="Pengeluaran Jan"></div>
+          <span class="text-[10px] text-center mt-2 text-on-surface-variant">Jan</span>
+        </div>
+        <div class="flex-1 flex flex-col justify-end gap-1 h-full">
+          <div class="bg-primary w-full h-[75%] rounded-t-sm"></div>
+          <div class="bg-error w-full h-[35%] rounded-t-sm"></div>
+          <span class="text-[10px] text-center mt-2 text-on-surface-variant">Feb</span>
+        </div>
+        <div class="flex-1 flex flex-col justify-end gap-1 h-full">
+          <div class="bg-primary w-full h-[55%] rounded-t-sm"></div>
+          <div class="bg-error w-full h-[40%] rounded-t-sm"></div>
+          <span class="text-[10px] text-center mt-2 text-on-surface-variant">Mar</span>
+        </div>
+        <div class="flex-1 flex flex-col justify-end gap-1 h-full">
+          <div class="bg-primary w-full h-[90%] rounded-t-sm"></div>
+          <div class="bg-error w-full h-[25%] rounded-t-sm"></div>
+          <span class="text-[10px] text-center mt-2 text-on-surface-variant">Apr</span>
+        </div>
+        <div class="flex-1 flex flex-col justify-end gap-1 h-full">
+          <div class="bg-primary w-full h-[80%] rounded-t-sm"></div>
+          <div class="bg-error w-full h-[45%] rounded-t-sm"></div>
+          <span class="text-[10px] text-center mt-2 text-on-surface-variant">Mei</span>
+        </div>
+        <div class="flex-1 flex flex-col justify-end gap-1 h-full">
+          <div class="bg-primary w-full h-[65%] rounded-t-sm"></div>
+          <div class="bg-error w-full h-[30%] rounded-t-sm"></div>
+          <span class="text-[10px] text-center mt-2 text-on-surface-variant">Jun</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="lg:col-span-4 flex flex-col gap-gutter">
+      <div class="bg-primary text-on-primary p-stack-md rounded-xl h-full flex flex-col justify-between overflow-hidden relative">
+        <img alt="Donation Box" class="absolute inset-0 w-full h-full object-cover opacity-20"
+          src="https://lh3.googleusercontent.com/aida-public/AB6AXuAUgdViF0oV6EhBekhSza-TwQR1uAl7dZAjL5MUk_jXxEyK1tfConvX0V5oDwxVCXgsnbC70zhmtZW1MsZcmhbQDOBx38UheNqDHGtoGBie0dbvPjUhYyaCrhnO0IUvl-stW50e7qqdmH0xODEv7JcZiP9KcrATOeB0mICRvGL8-acMMqa-IT8BaMUwBXdNxoFq8rM6Ath_Y4YX6kjUO7r7hHYxjQveTNBvG30upi0QrZAgSQUjk-IdczR4QPp8hetKCwa04SmP0L2t"/>
+        <div class="relative z-10">
+          <h4 class="font-headline-sm text-headline-sm mb-2">Yuk Sedekah!</h4>
+          <p class="font-body-md text-body-md opacity-90">Setiap rupiah yang anda infakkan akan sangat berarti bagi kelancaran operasional Masjid.</p>
+        </div>
+        <a href="sedekah.html" class="relative z-10 mt-6 bg-on-primary text-primary font-bold py-3 rounded-lg hover:bg-primary-fixed transition-colors text-center" style="text-decoration:none;display:block">
+          Infaq Sekarang
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Transaction Table Section -->
+  <div class="bg-surface-container-lowest border border-outline-variant rounded-xl overflow-hidden shadow-sm relative z-10">
+    <div class="p-6 border-b border-outline-variant flex flex-col md:flex-row md:items-center justify-between gap-4">
+      <h3 class="font-headline-sm text-headline-sm text-on-surface">Riwayat Transaksi</h3>
+      <div class="flex flex-wrap gap-3">
+        <div class="relative">
+          <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-sm">search</span>
+          <input class="pl-10 pr-4 py-2 bg-surface-container-low border-none rounded-lg text-sm focus:ring-2 focus:ring-primary w-full md:w-64" id="searchInput" placeholder="Cari deskripsi..." type="text"/>
+        </div>
+        <select class="bg-surface-container-low border-none rounded-lg text-sm px-4 py-2 focus:ring-2 focus:ring-primary" id="categoryFilter">
+          <option value="semua">Semua Kategori</option>
+          <option value="infak">Infak</option>
+          <option value="operasional">Operasional</option>
+          <option value="pembangunan">Pembangunan</option>
+          <option value="gaji">Gaji</option>
+        </select>
+      </div>
+    </div>
+    <div class="overflow-x-auto">
+      <table class="w-full text-left border-collapse">
+        <thead class="bg-surface-container-low">
+          <tr>
+            <th class="px-6 py-4 font-label-md text-label-md text-on-surface-variant border-b border-outline-variant">Tanggal</th>
+            <th class="px-6 py-4 font-label-md text-label-md text-on-surface-variant border-b border-outline-variant">Keterangan</th>
+            <th class="px-6 py-4 font-label-md text-label-md text-on-surface-variant border-b border-outline-variant">Kategori</th>
+            <th class="px-6 py-4 font-label-md text-label-md text-on-surface-variant border-b border-outline-variant text-right">Jumlah</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-outline-variant/30" id="transactionBody">
+          <tr class="hover:bg-surface-container-low transition-colors" data-category="infak" data-desc="infak sholat jumat berkah">
+            <td class="px-6 py-4 font-body-md text-body-md">12 Okt 2024</td>
+            <td class="px-6 py-4 font-body-md text-body-md">Infak Sholat Jumat Berkah</td>
+            <td class="px-6 py-4">
+              <span class="bg-primary-container/10 text-primary px-3 py-1 rounded-full text-[12px] font-bold">Infak</span>
+            </td>
+            <td class="px-6 py-4 font-body-md text-body-md text-primary font-semibold text-right">+ Rp 12.450.000</td>
+          </tr>
+          <tr class="hover:bg-surface-container-low transition-colors" data-category="operasional" data-desc="pembayaran listrik air pln">
+            <td class="px-6 py-4 font-body-md text-body-md">10 Okt 2024</td>
+            <td class="px-6 py-4 font-body-md text-body-md">Pembayaran Listrik & Air (PLN)</td>
+            <td class="px-6 py-4">
+              <span class="bg-surface-container-highest text-on-surface-variant px-3 py-1 rounded-full text-[12px] font-bold">Operasional</span>
+            </td>
+            <td class="px-6 py-4 font-body-md text-body-md text-error font-semibold text-right">- Rp 3.200.000</td>
+          </tr>
+          <tr class="hover:bg-surface-container-low transition-colors" data-category="pembangunan" data-desc="sedekah pembangunan menara">
+            <td class="px-6 py-4 font-body-md text-body-md">08 Okt 2024</td>
+            <td class="px-6 py-4 font-body-md text-body-md">Sedekah Pembangunan Menara</td>
+            <td class="px-6 py-4">
+              <span class="bg-secondary-container/20 text-secondary px-3 py-1 rounded-full text-[12px] font-bold">Pembangunan</span>
+            </td>
+            <td class="px-6 py-4 font-body-md text-body-md text-primary font-semibold text-right">+ Rp 25.000.000</td>
+          </tr>
+          <tr class="hover:bg-surface-container-low transition-colors" data-category="gaji" data-desc="honorarium guru tpa 12 orang">
+            <td class="px-6 py-4 font-body-md text-body-md">05 Okt 2024</td>
+            <td class="px-6 py-4 font-body-md text-body-md">Honorarium Guru TPA (12 Orang)</td>
+            <td class="px-6 py-4">
+              <span class="bg-surface-container-highest text-on-surface-variant px-3 py-1 rounded-full text-[12px] font-bold">Gaji</span>
+            </td>
+            <td class="px-6 py-4 font-body-md text-body-md text-error font-semibold text-right">- Rp 6.000.000</td>
+          </tr>
+          <tr class="hover:bg-surface-container-low transition-colors" data-category="operasional" data-desc="maintenance kebersihan masjid">
+            <td class="px-6 py-4 font-body-md text-body-md">02 Okt 2024</td>
+            <td class="px-6 py-4 font-body-md text-body-md">Maintenance Kebersihan Masjid</td>
+            <td class="px-6 py-4">
+              <span class="bg-surface-container-highest text-on-surface-variant px-3 py-1 rounded-full text-[12px] font-bold">Operasional</span>
+            </td>
+            <td class="px-6 py-4 font-body-md text-body-md text-error font-semibold text-right">- Rp 1.500.000</td>
+          </tr>
+        </tbody>
+      </table>
+      <p class="px-6 py-8 text-center text-on-surface-variant font-body-md text-body-md hidden" id="emptyState">Tidak ada transaksi yang cocok dengan pencarian.</p>
+    </div>
+    <div class="p-6 border-t border-outline-variant flex items-center justify-between">
+      <span class="font-label-sm text-label-sm text-on-surface-variant">Menampilkan 5 dari 124 transaksi</span>
+      <div class="flex gap-2">
+        <button class="p-2 border border-outline-variant rounded hover:bg-surface-container-low transition-colors disabled:opacity-30" disabled="">
+          <span class="material-symbols-outlined text-sm">chevron_left</span>
+        </button>
+        <button class="p-2 border border-outline-variant rounded hover:bg-surface-container-low transition-colors">
+          <span class="material-symbols-outlined text-sm">chevron_right</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</main>
+
+<!-- Footer -->
+<footer class="bg-surface-container-highest dark:bg-inverse-surface border-t-4 border-secondary-container mt-stack-lg">
+  <div class="grid grid-cols-1 md:grid-cols-12 gap-gutter px-margin-desktop py-stack-lg max-w-container-max mx-auto">
+    <div class="md:col-span-4">
+      <div class="font-headline-sm text-headline-sm text-on-surface dark:text-inverse-on-surface mb-4">Masjid Assalam</div>
+      <p class="font-body-md text-body-md text-on-surface-variant mb-6">Pusat Dakwah dan Kegiatan Sosial Kemasyarakatan. Memberikan manfaat bagi umat dengan transparansi dan akuntabilitas.</p>
+      <div class="flex gap-4">
+        <span class="material-symbols-outlined text-primary cursor-pointer hover:opacity-75 transition-opacity">face_nod</span>
+        <span class="material-symbols-outlined text-primary cursor-pointer hover:opacity-75 transition-opacity">alternate_email</span>
+        <span class="material-symbols-outlined text-primary cursor-pointer hover:opacity-75 transition-opacity">call</span>
+      </div>
+    </div>
+    <div class="md:col-span-2">
+      <h4 class="font-label-md text-label-md text-primary mb-4">Menu Utama</h4>
+      <ul class="flex flex-col gap-2">
+        <li><a class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary transition-colors hover:underline" href="program.html">Program</a></li>
+        <li><a class="font-label-sm text-label-sm text-primary font-semibold hover:underline" href="kas.html">Laporan Kas</a></li>
+        <li><a class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary transition-colors hover:underline" href="#">Kontak Kami</a></li>
+      </ul>
+    </div>
+    <div class="md:col-span-3">
+      <h4 class="font-label-md text-label-md text-primary mb-4">Legal &amp; Privasi</h4>
+      <ul class="flex flex-col gap-2">
+        <li><a class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary transition-colors hover:underline" href="#">Kebijakan Privasi</a></li>
+        <li><a class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary transition-colors hover:underline" href="#">Syarat & Ketentuan</a></li>
+        <li><a class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary transition-colors hover:underline" href="#">Laporan Keuangan Tahunan</a></li>
+      </ul>
+    </div>
+    <div class="md:col-span-3">
+      <h4 class="font-label-md text-label-md text-primary mb-4">Alamat</h4>
+      <p class="font-label-sm text-label-sm text-on-surface-variant">Jl. Damai No. 123, Kel. Tenang, Kec. Sejahtera, Kota Assalam 12345</p>
+    </div>
+    <div class="md:col-span-12 pt-stack-md border-t border-outline-variant/30 text-center">
+      <p class="font-label-sm text-label-sm text-on-surface-variant">© 2024 Masjid Assalam. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+
+<script src="api.js"></script>
+<script src="kas.js"></script>
+</body>
+</html>

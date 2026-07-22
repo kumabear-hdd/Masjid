@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Instruksi Pembayaran - Masjid Assalam</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="sedekah.css">
+<link rel="stylesheet" href="payment.css">
+</head>
+<body>
+<nav class="navbar">
+  <div class="container">
+    <a href="index.html" class="brand" style="text-decoration:none;color:inherit">Masjid Assalam</a>
+    <div class="nav-links">
+      <a href="index.html">Beranda</a>
+      <a href="sedekah.html" class="active">Sedekah</a>
+      <a href="kontak.html">Kontak</a>
+    </div>
+    <a href="sedekah.html" class="btn-primary" style="text-decoration:none">Sedekah Lagi</a>
+  </div>
+</nav>
+
+<header class="header">
+  <div class="container">
+    <div class="header-eyebrow">
+      <span class="material-symbols-outlined">payments</span>
+      <span class="label">Instruksi Pembayaran</span>
+    </div>
+    <h1>Selesaikan Sedekah Anda</h1>
+    <p>Transfer sesuai nominal, lalu unggah bukti (opsional). Admin akan memverifikasi donasi Anda.</p>
+  </div>
+</header>
+
+<main class="pattern-overlay payment-main">
+  <div class="container payment-grid">
+    <div class="form-card payment-card" id="paymentCard">
+      <p class="loading-text">Memuat data donasi...</p>
+    </div>
+
+    <div class="form-card payment-card">
+      <h3 class="section-title">Unggah Bukti Transfer</h3>
+      <p class="pay-hint">Opsional, tetapi mempercepat verifikasi admin.</p>
+      <form id="proofForm">
+        <div class="field" style="margin-bottom:16px;">
+          <label>File gambar (JPG/PNG, max 3MB)</label>
+          <input type="file" id="proofFile" accept="image/jpeg,image/png,image/webp" required>
+        </div>
+        <button type="submit" class="submit-btn" id="proofBtn">
+          <span class="material-symbols-outlined">upload</span>
+          Kirim Bukti
+        </button>
+      </form>
+      <div id="proofStatus" class="proof-status" hidden></div>
+
+      <hr class="pay-divider">
+
+      <h3 class="section-title">Cek Status</h3>
+      <p class="pay-hint">Status saat ini: <strong id="statusLabel">-</strong></p>
+      <button type="button" class="btn-outline-pay" id="refreshStatus">Perbarui Status</button>
+      <a href="sedekah.html" class="btn-outline-pay" style="display:block;text-align:center;margin-top:12px;text-decoration:none;">Kembali ke Form Sedekah</a>
+    </div>
+  </div>
+</main>
+
+<footer style="padding:40px 16px;text-align:center;color:#3e4942;font-size:14px;">
+  &copy; Masjid Assalam — Jazakumullahu khairan
+</footer>
+
+<script src="api.js"></script>
+<script src="payment.js"></script>
+</body>
+</html>

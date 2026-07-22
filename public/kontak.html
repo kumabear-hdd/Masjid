@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kontak - Masjid Assalam</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="kontak.css">
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="navbar">
+  <div class="container">
+    <div class="brand">Masjid Assalam</div>
+    <div class="nav-links">
+      <a href="index.html">Beranda</a>
+      <a href="profil.html">Profil</a>
+      <a href="kas.html">Kas</a>
+      <a href="program.html">Program</a>
+      <a href="sedekah.html">Sedekah</a>
+      <a href="kontak.html" class="active">Kontak</a>
+      <a href="sedekah.html" class="btn-primary" style="text-decoration:none">Sedekah Sekarang</a>
+    </div>
+    <button class="menu-toggle">
+      <span class="material-symbols-outlined">menu</span>
+    </button>
+  </div>
+</nav>
+
+<main>
+  <!-- Header -->
+  <header class="header">
+    <div class="container">
+      <div class="header-title">
+        <button><span class="material-symbols-outlined" style="font-size:48px;">arrow_back</span></button>
+        <h1>Kontak Kami</h1>
+      </div>
+      <p>Kami siap melayani dan menjawab pertanyaan Anda seputar program, kegiatan ibadah, dan layanan umat di Masjid Assalam.</p>
+    </div>
+  </header>
+
+  <!-- Content Grid -->
+  <div class="content-grid">
+    <!-- Main Column -->
+    <div class="main-col">
+      <!-- Contact Form -->
+      <section class="card">
+        <h2>Kirim Pesan</h2>
+        <form>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Nama Lengkap</label>
+              <input type="text" placeholder="Masukkan nama Anda">
+            </div>
+            <div class="form-group">
+              <label>Nomor WhatsApp</label>
+              <input type="tel" placeholder="08xx xxxx xxxx">
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Alamat Email</label>
+            <input type="email" placeholder="nama@email.com">
+          </div>
+          <div class="form-group">
+            <label>Pesan</label>
+            <textarea rows="5" placeholder="Tuliskan pesan atau pertanyaan Anda di sini..."></textarea>
+          </div>
+          <button type="submit" class="submit-btn">Kirim Pesan</button>
+        </form>
+      </section>
+
+      <!-- FAQ -->
+      <section class="faq-section">
+        <h2>Pertanyaan Umum (FAQ)</h2>
+        <div class="faq-list">
+          <details>
+            <summary>
+              <span>Bagaimana cara menyalurkan donasi/sedekah?</span>
+              <span class="material-symbols-outlined icon">expand_more</span>
+            </summary>
+            <div class="faq-answer">
+              Anda dapat menyalurkan donasi melalui menu "Sedekah Sekarang" di navigasi atas atau datang langsung ke kantor sekretariat masjid di jam operasional. Kami menerima transfer bank dan e-wallet.
+            </div>
+          </details>
+
+          <details>
+            <summary>
+              <span>Kapan jam operasional sekretariat masjid?</span>
+              <span class="material-symbols-outlined icon">expand_more</span>
+            </summary>
+            <div class="faq-answer">
+              Kantor sekretariat kami buka setiap hari mulai pukul 08:00 hingga 20:00 WIB, dengan waktu istirahat pada saat pelaksanaan shalat fardhu.
+            </div>
+          </details>
+
+          <details>
+            <summary>
+              <span>Apakah ada program pengajian rutin untuk umum?</span>
+              <span class="material-symbols-outlined icon">expand_more</span>
+            </summary>
+            <div class="faq-answer">
+              Ya, kami memiliki kajian rutin setiap hari Sabtu ba'da Maghrib dan kajian khusus muslimah setiap Rabu pagi pukul 09:00. Silakan cek menu "Program" untuk detail lebih lanjut.
+            </div>
+          </details>
+        </div>
+      </section>
+    </div>
+
+    <!-- Sidebar -->
+    <aside class="side-col">
+      <!-- Alamat -->
+      <div class="info-card">
+        <div class="row">
+          <div class="icon-circle primary">
+            <span class="material-symbols-outlined">location_on</span>
+          </div>
+          <div>
+            <h3>Alamat</h3>
+            <p id="address-text">Jl. Masjid No. 123, Kelurahan Damai, Kecamatan Sejahtera, Kota Madani, 12345</p>
+          </div>
+        </div>
+        <button class="copy-btn" onclick="copyText('address-text', this)">
+          <span class="material-symbols-outlined" style="font-size:18px;">content_copy</span>
+          Salin Alamat
+        </button>
+      </div>
+
+      <!-- Communication -->
+      <div class="comm-grid">
+        <a class="info-card contact-link" href="https://wa.me/6285711478180" target="_blank">
+          <div class="row">
+            <div class="icon-circle whatsapp">
+              <span class="material-symbols-outlined">chat</span>
+            </div>
+            <div>
+              <h3>WhatsApp</h3>
+              <p class="bold">+62 857 1147 8180</p>
+            </div>
+          </div>
+        </a>
+
+        <a class="info-card contact-link" href="mailto:info@masjidassalam.org">
+          <div class="row">
+            <div class="icon-circle email">
+              <span class="material-symbols-outlined">mail</span>
+            </div>
+            <div>
+              <h3>Email</h3>
+              <p class="bold">info@masjidassalam.org</p>
+            </div>
+          </div>
+        </a>
+      </div>
+
+      <!-- Map -->
+      <div class="map-card">
+        <div class="map-wrapper">
+          <div class="map-bg"></div>
+          <div class="map-overlay"></div>
+          <div class="map-marker">
+            <div class="map-label">Masjid Assalam</div>
+            <div class="marker-pin">
+              <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">mosque</span>
+            </div>
+          </div>
+          <div class="map-controls">
+            <button><span class="material-symbols-outlined">add</span></button>
+            <button><span class="material-symbols-outlined">remove</span></button>
+          </div>
+          <button class="directions-btn" onclick="openMaps()">
+            <span class="material-symbols-outlined" style="font-size:18px;">directions</span>
+            Petunjuk Arah
+          </button>
+        </div>
+      </div>
+    </aside>
+  </div>
+</main>
+
+<!-- Footer -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-col-4">
+      <div class="footer-brand">Masjid Assalam</div>
+      <p class="footer-desc">Menjadi pusat dakwah dan pemberdayaan umat yang transparan, modern, dan melayani sepenuh hati.</p>
+    </div>
+    <div class="footer-col-3 footer-col">
+      <h4>Navigasi</h4>
+      <div class="footer-links">
+        <a href="program.html">Program</a>
+        <a href="kas.html">Laporan Kas</a>
+        <a href="kontak.html">Kontak Kami</a>
+      </div>
+    </div>
+    <div class="footer-col-3 footer-col">
+      <h4>Hukum</h4>
+      <div class="footer-links">
+        <a href="#">Kebijakan Privasi</a>
+        <a href="#">Syarat &amp; Ketentuan</a>
+      </div>
+    </div>
+    <div class="footer-col-2 footer-col">
+      <h4>Sosial</h4>
+      <div class="footer-social">
+        <a href="#"><span class="material-symbols-outlined">public</span></a>
+        <a href="#"><span class="material-symbols-outlined">alternate_email</span></a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2024 Masjid Assalam. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+
+<script src="kontak.js"></script>
+</body>
+</html>

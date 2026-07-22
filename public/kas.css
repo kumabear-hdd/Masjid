@@ -1,0 +1,26 @@
+body {
+    background-color: #f7f9fb;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+}
+
+.material-symbols-outlined {
+    font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+}
+
+.islamic-pattern {
+    background-image: url("https://www.transparenttextures.com/patterns/cubes.png");
+    opacity: 0.03;
+}
+
+.shadow-card {
+    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.05);
+}
+
+#mobileMenu.flex {
+    display: flex;
+}
+
+/* hover lift effect for cards */
+.rounded-xl {
+    transition: transform 0.3s ease;
+}

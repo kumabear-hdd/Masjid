@@ -1,0 +1,71 @@
+/* =============================================
+   style.css — Masjid Assalam Admin Login
+   ============================================= */
+
+/* Base */
+body {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  background-color: #f7f9fb;
+}
+
+/* Islamic Pattern Overlay */
+.islamic-pattern {
+  background-image: url("https://www.transparenttextures.com/patterns/arabesque.png");
+  opacity: 0.03;
+  pointer-events: none;
+}
+
+/* Login Card Shadow */
+.login-card {
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.05);
+}
+
+/* Material Symbols default variation settings */
+.material-symbols-outlined {
+  font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+}
+
+/* =============================================
+   Input Focus Enhancement
+   ============================================= */
+input:focus {
+  box-shadow: 0 0 0 3px rgba(0, 105, 71, 0.12);
+}
+
+/* =============================================
+   Login Button Transition
+   ============================================= */
+button[type="submit"] {
+  letter-spacing: 0.08em;
+}
+
+button[type="submit"]:hover {
+  box-shadow: 0 4px 12px rgba(0, 105, 71, 0.2);
+}
+
+/* =============================================
+   Password Toggle Button
+   ============================================= */
+.toggle-password {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  line-height: 1;
+}
+
+.toggle-password:focus-visible {
+  outline: 2px solid #006947;
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* =============================================
+   Reduced Motion
+   ============================================= */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
+}

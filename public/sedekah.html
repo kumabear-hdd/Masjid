@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sedekah Online - Masjid Assalam</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="sedekah.css">
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="navbar">
+  <div class="container">
+    <div class="brand">Masjid Assalam</div>
+    <div class="nav-links">
+      <a href="index.html">Beranda</a>
+      <a href="profil.html">Profil</a>
+      <a href="kas.html">Kas</a>
+      <a href="program.html">Program</a>
+      <a href="sedekah.html" class="active">Sedekah</a>
+      <a href="kontak.html">Kontak</a>
+    </div>
+    <a href="sedekah.html" class="btn-primary" style="text-decoration:none">Sedekah Sekarang</a>
+  </div>
+</nav>
+
+<!-- Header -->
+<header class="header">
+  <div class="container">
+    <div class="header-eyebrow">
+      <span class="material-symbols-outlined">favorite</span>
+      <span class="label">Layanan Donasi</span>
+    </div>
+    <h1>Sedekah Jariyah</h1>
+    <p>Setiap rupiah yang Anda infakkan membantu program dakwah, pendidikan, dan pemeliharaan fasilitas Masjid Assalam.</p>
+  </div>
+</header>
+
+<main class="pattern-overlay">
+  <div class="main-grid">
+
+    <!-- Left Column -->
+    <div class="col-left">
+      <!-- Impact Card -->
+      <div class="impact-card">
+        <h3>Dampak Sedekah Anda</h3>
+        <div class="impact-list">
+          <div class="impact-item">
+            <div class="impact-icon food">
+              <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">restaurant</span>
+            </div>
+            <div>
+              <p class="title">Program Makan Jumat</p>
+              <p class="desc">250+ paket makanan dibagikan setiap pekannya untuk jamaah dan dhuafa.</p>
+            </div>
+          </div>
+          <div class="impact-item">
+            <div class="impact-icon edu">
+              <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">school</span>
+            </div>
+            <div>
+              <p class="title">Beasiswa Santri</p>
+              <p class="desc">Membiayai pendidikan 45 santri penghafal Al-Qur'an tingkat dasar.</p>
+            </div>
+          </div>
+          <div class="impact-item">
+            <div class="impact-icon facility">
+              <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">handyman</span>
+            </div>
+            <div>
+              <p class="title">Fasilitas Masjid</p>
+              <p class="desc">Perawatan AC, sound system, dan kebersihan area sholat demi kenyamanan ibadah.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Donation Ticker -->
+      <div class="ticker-card">
+        <div class="ticker-head">
+          <h4>Donasi Terkumpul (Bulan ini)</h4>
+          <span class="badge-actual">Aktual</span>
+        </div>
+        <p class="ticker-amount">Rp 42.850.000</p>
+        <div class="progress-bar">
+          <div class="progress-fill"></div>
+        </div>
+        <p class="ticker-target">Target: Rp 50.000.000 (85%)</p>
+      </div>
+
+      <!-- Image Quote -->
+      <div class="quote-image">
+        <img alt="Masjid interior" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCs3FF63HsEG0EvftpJfhjYkUk8dziCgqXS9FniuVA3XSUz65arfJQJRhOGDq5CZniVrN3osOlHDtcqrF8G6epUFShXWYaZefyH9D2JG5XM3Bm4Btx0uJsEr2gO3xDBYkzMBaoopjfBCaKlC0aVNc-oxbbgwxUMd7CNd6XTAdewa3dkD-aLtAV0WRHQVi8QlBt9iMhDPmsRNC45Q87qEyVEmbHJw2z5L6A0_sIA4FxzeCU7J_a_xAVn3NEFw_lWstSfqNZ21Ty2Q6Ju">
+        <div class="quote-overlay">
+          <p>"Barangsiapa membangun masjid karena Allah, maka Allah akan membangunkan untuknya rumah di surga." (HR. Muslim)</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right Column: Donation Form -->
+    <div class="col-right">
+      <div class="form-card">
+        <form id="donationForm">
+          <!-- Step 1: Nominal -->
+          <section>
+            <label class="section-title">Pilih Nominal Sedekah</label>
+            <div class="nominal-grid">
+              <button type="button" class="nominal-btn" onclick="selectNominal(this, '10.000')">Rp 10.000</button>
+              <button type="button" class="nominal-btn" onclick="selectNominal(this, '25.000')">Rp 25.000</button>
+              <button type="button" class="nominal-btn selected" onclick="selectNominal(this, '50.000')">Rp 50.000</button>
+              <button type="button" class="nominal-btn" onclick="selectNominal(this, '100.000')">Rp 100.000</button>
+              <button type="button" class="nominal-btn" onclick="selectNominal(this, '250.000')">Rp 250.000</button>
+              <button type="button" class="nominal-btn" onclick="document.getElementById('custom_nominal').focus()">Lainnya</button>
+            </div>
+            <div class="input-currency">
+              <span class="prefix">Rp</span>
+              <input type="text" id="custom_nominal" name="amount" placeholder="Nominal Custom" value="50.000">
+            </div>
+          </section>
+
+          <!-- Step 2: Identity -->
+          <section style="display:flex; flex-direction:column; gap:24px;">
+            <label class="section-title" style="margin-bottom:0;">Data Diri</label>
+            <div class="field-grid">
+              <div class="field">
+                <label>Nama Lengkap</label>
+                <input type="text" name="donor_name" placeholder="Masukkan nama Anda">
+              </div>
+              <div class="field">
+                <label>WhatsApp</label>
+                <input type="tel" name="whatsapp" placeholder="081234...">
+              </div>
+            </div>
+            <div class="field">
+              <label>Email (Opsional)</label>
+              <input type="email" name="email" placeholder="nama@email.com">
+            </div>
+            <div class="checkbox-row">
+              <input type="checkbox" id="anonim" name="is_anonymous">
+              <label for="anonim">Berinfak sebagai Hamba Allah (Anonim)</label>
+            </div>
+          </section>
+
+          <!-- Step 3: Message -->
+          <section style="display:flex; flex-direction:column; gap:4px;">
+            <label style="font-size:12px; font-weight:500; color:var(--on-surface-variant);">Pesan / Doa</label>
+            <textarea name="message" rows="3" placeholder="Tuliskan harapan atau doa Anda..."></textarea>
+          </section>
+
+          <!-- Step 4: Payment Methods -->
+          <section>
+            <label class="section-title">Metode Pembayaran</label>
+            <div class="payment-list">
+              <label class="payment-option active">
+                <div class="left">
+                  <input type="radio" name="payment_method" value="qris" checked>
+                  <div class="method">
+                    <span class="material-symbols-outlined">qr_code_2</span>
+                    <span class="method-label">QRIS (GoPay, OVO, Dana, LinkAja)</span>
+                  </div>
+                </div>
+                <img alt="QRIS" src="qris-masjid.jpeg">
+              </label>
+              <label class="payment-option">
+                <div class="left">
+                  <input type="radio" name="payment_method" value="bank">
+                  <div class="method">
+                    <span class="material-symbols-outlined">account_balance</span>
+                    <span class="method-label">Transfer Bank (BSI, Mandiri, BCA)</span>
+                  </div>
+                </div>
+                <div class="bank-tags">
+                  <span class="bsi">BSI</span>
+                  <span class="mdr">MDR</span>
+                </div>
+              </label>
+            </div>
+          </section>
+
+          <button type="submit" class="submit-btn">
+            <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">volunteer_activism</span>
+            Sedekah Sekarang
+          </button>
+          <p class="secure-note">
+            <span class="material-symbols-outlined">verified_user</span>
+            Transaksi Anda terenkripsi dan aman
+          </p>
+        </form>
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<!-- Success Stories -->
+<section class="stories-section">
+  <div class="container">
+    <div class="stories-head">
+      <div>
+        <h2>Penyaluran Terkini</h2>
+        <p>Transparansi amanah umat adalah prioritas utama kami.</p>
+      </div>
+      <button class="stories-link">
+        Lihat Laporan Lengkap
+        <span class="material-symbols-outlined">arrow_forward</span>
+      </button>
+    </div>
+
+    <div class="stories-grid">
+      <!-- Story 1 -->
+      <div class="story-card">
+        <img alt="Distribution of food" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDR_JUmBmrAJaVxMVeNNOF_3lm9VX9U0ik6XXjgiXIf9qL3G_RFipJMj1yeFzT_FrO6NHVuvRPzH_al-_6DWRKNHjVV8w7amyHkMjWr-pTjKpfxt0Fe9TLCkGfclsFxU5cn3zNLB_7BMpGPrDyLRKlhK39ao3WrFBn-xWxKLYohGn5CsoETIHm9rzbVZPO37FJyDiqK5ltjStnElWT35tks19A_ymClIfumUJ3lpUavQT6k_k86e77ahDw46uOpCz09hcu2hPcSAYww">
+        <div class="story-body">
+          <span class="story-tag sosial">Sosial</span>
+          <h4>Penyaluran 500 Paket Sembako</h4>
+          <p class="desc">Bantuan pangan untuk keluarga terdampak ekonomi di sekitar wilayah Masjid Assalam.</p>
+          <div class="story-footer">
+            <span class="date">12 Jan 2024</span>
+            <span class="status selesai">Selesai</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Story 2 -->
+      <div class="story-card">
+        <img alt="Renovation" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDB0kLIDIJDJ9xHi63zrXDo1s7uHjyoMhRnzc4C1huyPs0XsaAGo11gLwKAbOh7MEvBKyE7HBkLbQLBMR-rbXb0hYYektcPoV6gpRkeVP_uTfHjiNU5KS66cDNj89T-mTJ56RjUCJBBFVMhGXmCK2aQwlVm43ZxKmAncs4yhy5PbMJYikmYyMKaQklPNnBvJW3Tov-Rjh52FCkN_XchZCrDy654KlJ-CbW7sMn7ANxG5Ll-S-yAhp9VuwyxTzW-uBaV7RBwn_t_L7iU">
+        <div class="story-body">
+          <span class="story-tag fasilitas">Fasilitas</span>
+          <h4>Renovasi Area Wudhu Wanita</h4>
+          <p class="desc">Peningkatan fasilitas sanitasi dan sirkulasi udara demi kenyamanan jamaah.</p>
+          <div class="story-footer">
+            <span class="date">05 Jan 2024</span>
+            <span class="status berjalan">Sedang Berjalan</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Story 3 -->
+      <div class="story-card">
+        <img alt="Education" src="https://lh3.googleusercontent.com/aida-public/AB6AXuALevat_LErsuVI0E2EuK1VnbTlZ7Wv_WbTW4sFIs_uS36FLyEJPLZ53ESFXr7hJTQZA9sZI1pW6idd86cMAXWO3L3DLiP2PcGVKQUR-d95SRxFLucvCvUbscb41-Glqq5bXPAn6yxOrfFbZNkiXvYwKYozPJRuhIsIZ-klHVVlWi52w_ArDih0khXtYGClcYsMxqJLcRjNjr0XjBQ3mTDqthZJ1XujdLAV-3FyERJeCll8GSxQITBoSYobWHuedqGmIiIayiF1g8ZB">
+        <div class="story-body">
+          <span class="story-tag pendidikan">Pendidikan</span>
+          <h4>Pengadaan Mushaf Al-Qur'an</h4>
+          <p class="desc">Distribusi 100 mushaf baru untuk santri TPA Masjid Assalam dan majelis taklim.</p>
+          <div class="story-footer">
+            <span class="date">28 Des 2023</span>
+            <span class="status selesai">Selesai</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-col-5">
+      <div class="footer-brand">Masjid Assalam</div>
+      <p class="footer-desc">
+        Jl. Kebahagiaan No. 123, Kota Madani, Indonesia.<br>
+        Menjadi pusat ibadah, pendidikan, dan pemberdayaan umat yang transparan dan profesional.
+      </p>
+      <div class="footer-social">
+        <a href="#"><span class="material-symbols-outlined">face_nod</span></a>
+        <a href="#"><span class="material-symbols-outlined">camera_indoor</span></a>
+        <a href="#"><span class="material-symbols-outlined">alternate_email</span></a>
+      </div>
+    </div>
+
+    <div class="footer-col-3">
+      <h5>Navigasi</h5>
+      <ul class="footer-links">
+        <li><a href="program.html">Program</a></li>
+        <li><a href="kas.html">Laporan Kas</a></li>
+        <li><a href="kontak.html">Kontak Kami</a></li>
+        <li><a href="#">Kebijakan Privasi</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-col-4">
+      <h5>Kontak Bantuan</h5>
+      <p class="help-text">Butuh bantuan untuk melakukan sedekah online atau konfirmasi transfer?</p>
+      <div class="help-card">
+        <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">chat</span>
+        <div>
+          <p class="label">WhatsApp Admin</p>
+          <p class="value">0857-1147-8180</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>© 2026 Masjid Assalam. All rights reserved.</p>
+      <div class="accredit">
+        <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">verified</span>
+        <span style="font-size:12px; font-weight:500; color:var(--on-surface-variant);">Lembaga Amil Zakat Terakreditasi</span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="api.js"></script>
+<script src="sedekah.js"></script>
+</body>
+</html>

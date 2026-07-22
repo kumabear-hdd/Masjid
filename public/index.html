@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html class="light" lang="id">
+
+<head>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+  <title>Masjid Assalam - Pusat Ibadah & Dakwah</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&amp;display=swap"
+    rel="stylesheet" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+    rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="icon" type="favicon-masjid.png" href="favicon-masjid.png">
+</head>
+
+<body class="bg-background font-body-md text-on-surface">
+
+  <!-- Top Navigation Bar -->
+  <nav
+    class="docked full-width top-0 bg-surface dark:bg-surface-dim border-b border-outline-variant dark:border-outline h-20 sticky z-50">
+    <div class="flex justify-between items-center w-full px-margin-desktop max-w-container-max mx-auto h-full">
+      <div class="font-headline-sm text-headline-sm font-bold text-primary dark:text-inverse-primary">Masjid AsSalam
+      </div>
+      <div class="hidden md:flex gap-8 items-center">
+        <a class="font-label-md text-label-md text-primary font-bold border-b-2 border-primary pb-1"
+          href="index.html">Beranda</a>
+        <a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors"
+          href="profil.html">Profil</a>
+        <a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors"
+          href="kas.html">Kas</a>
+        <a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors"
+          href="program.html">Program</a>
+        <a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors"
+          href="sedekah.html">Sedekah</a>
+        <a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors"
+          href="kontak.html">Kontak</a>
+        <a href="sedekah.html"
+          class="bg-primary text-on-primary px-6 py-2 rounded-lg font-label-md text-label-md hover:bg-primary-container transition-all active:scale-95 duration-150"
+          style="text-decoration:none">
+          Sedekah Sekarang
+        </a>
+      </div>
+      <button class="md:hidden text-primary" id="menuBtn">
+        <span class="material-symbols-outlined">menu</span>
+      </button>
+    </div>
+    <!-- Mobile menu -->
+    <div class="hidden flex-col gap-4 px-margin-mobile py-4 bg-surface border-t border-outline-variant" id="mobileMenu">
+      <a class="font-label-md text-label-md text-primary font-bold" href="index.html">Beranda</a>
+      <a class="font-label-md text-label-md text-on-surface-variant" href="profil.html">Profil</a>
+      <a class="font-label-md text-label-md text-on-surface-variant" href="kas.html">Kas</a>
+      <a class="font-label-md text-label-md text-on-surface-variant" href="program.html">Program</a>
+      <a class="font-label-md text-label-md text-on-surface-variant" href="sedekah.html">Sedekah</a>
+      <a class="font-label-md text-label-md text-on-surface-variant" href="kontak.html">Kontak</a>
+      <a href="sedekah.html" class="bg-primary text-on-primary px-6 py-2 rounded-lg font-label-md text-label-md w-full text-center" style="text-decoration:none;display:block">Sedekah Sekarang</a>
+    </div>
+  </nav>
+
+  <!-- Hero Banner -->
+  <header class="relative min-h-[819px] flex items-center justify-center text-center hero-gradient">
+    <div class="max-w-4xl px-margin-mobile">
+      <h1 class="font-headline-lg text-headline-lg text-on-primary mb-stack-sm md:text-6xl">
+        Masjid As Salam
+      </h1>
+      <h1 class="font-headline-lg text-headline-lg text-on-primary mb-stack-sm md:text-6xl">Dari Masjid, Cahaya Islam Menyinari Kehidupan</h1>
+      <p class="font-body-lg text-body-lg text-on-primary-container/90 mb-stack-md max-w-2xl mx-auto">
+        Membangun umat dengan ilmu dan amal melalui pelayanan keumatan yang modern.
+      </p>
+      <div class="flex flex-wrap justify-center gap-4">
+        <a href="program.html"
+          class="bg-primary text-on-primary px-8 py-4 rounded-lg font-label-md text-label-md hover:shadow-xl transition-all active:scale-95"
+          style="text-decoration:none;display:inline-block">
+          Lihat Program
+        </a>
+        <a href="sedekah.html"
+          class="bg-secondary-container text-on-secondary-container px-8 py-4 rounded-lg font-label-md text-label-md hover:shadow-xl transition-all active:scale-95"
+          style="text-decoration:none;display:inline-block">
+          Sedekah Online
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <div class="grid grid-cols-2 md:grid-cols-5 gap-4"></div>
+
+  
+  <!-- Kas Dashboard -->
+  <section class="max-w-container-max mx-auto px-margin-desktop py-8">
+    
+    <div class="grid md:grid-cols-2 gap-6">
+
+        <!-- Kas Masjid -->
+        <div class="bg-white rounded-2xl shadow-lg p-8">
+            <h2 class="text-3xl font-bold mb-4">
+                Kas Masjid
+            </h2>
+
+            <p class="text-gray-500 mb-2">
+                Total Saldo Kas
+            </p>
+
+            <p id="kasDisplay"
+               class="text-5xl font-bold text-green-600">
+                Rp 0
+            </p>
+
+            <p class="mt-4 text-gray-500">
+                Transparansi keuangan untuk jamaah.
+            </p>
+        </div>
+
+        <!-- Program Wakaf -->
+        <div class="bg-white rounded-2xl shadow-lg p-8">
+            <h2 class="text-3xl font-bold mb-4">
+                Program Wakaf
+            </h2>
+
+            <p class="text-gray-500 mb-4">
+                Pembangunan Gedung Pendidikan Islam
+            </p>
+
+            <div class="mb-4">
+                <div class="flex justify-between">
+                    <span>Terkumpul</span>
+                    <span id="wakafTerkumpul">
+                        Rp 125.000.000
+                    </span>
+                </div>
+
+                <div class="w-full bg-gray-200 rounded-full h-3 mt-2">
+                    <div class="bg-green-600 h-3 rounded-full"
+                         style="width:25%">
+                    </div>
+                </div>
+            </div>
+
+            <button
+                class="w-full bg-green-600 text-white py-3 rounded-xl hover:bg-green-700 transition">
+                Wakaf Sekarang
+            </button>
+        </div>
+
+    </div>
+
+</section>
+   
+  <!-- Sambutan Ketua DKM -->
+  <section class="py-stack-lg relative overflow-hidden">
+    <div class="islamic-pattern absolute inset-0"></div>
+    <div
+      class="max-w-container-max mx-auto px-margin-desktop grid grid-cols-1 md:grid-cols-12 gap-gutter items-right relative z-10">
+      <div class="md:col-span-5">
+        <div class="relative">
+          <img alt="Ketua DKM" class="rounded-xl shadow-lg w-full aspect-[4/5] object-cover border-8 border-white"
+            src="dkm-masjid.jpeg" />
+          <div class="absolute -bottom-6 -right-6 bg-secondary-container p-6 rounded-lg shadow-xl hidden md:block">
+            <span class="material-symbols-outlined text-4xl text-on-secondary-container"
+              style="font-variation-settings: 'FILL' 1;">format_quote</span>
+          </div>
+        </div>
+      </div>
+      <div class="md:col-span-7">
+        <span class="text-primary font-bold tracking-widest uppercase text-label-sm mb-2 block">Sambutan Ketua
+          DKM</span>
+        <h2 class="font-headline-md text-headline-md text-on-surface mb-stack-md">Membangun Sinergi Umat</h2>
+        <p class="font-body-lg text-body-lg text-on-surface-variant italic mb-stack-md">
+          "Membangun Sinergi Umat bukan sekadar ajakan untuk berkumpul, tetapi sebuah komitmen untuk saling menguatkan dalam iman, ilmu, dan amal. Melalui kebersamaan yang dilandasi ukhuwah Islamiyah, setiap individu dapat berkontribusi sesuai kemampuan demi mewujudkan masyarakat yang harmonis, peduli, dan penuh keberkahan. Masjid menjadi pusat pemersatu umat, tempat lahirnya kolaborasi dalam ibadah, pendidikan, kegiatan sosial, serta pemberdayaan masyarakat. Dengan semangat gotong royong dan saling mendukung, sinergi umat akan melahirkan kekuatan yang mampu menghadirkan manfaat yang luas, mempererat persaudaraan, serta menjadi jalan meraih ridha Allah SWT"
+        </p>
+        <div>
+          <p class="font-label-md text-label-md font-bold text-on-surface">Agung Setiawan.,M.Pd</p>
+          <p class="font-label-sm text-label-sm text-outline">Ketua DKM Assalam</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Program Unggulan (Bento Grid) -->
+  <section class="py-stack-lg bg-surface-container-low">
+    <div class="max-w-container-max mx-auto px-margin-desktop">
+      <div class="flex justify-between items-end mb-stack-lg">
+        <div>
+          <h2 class="font-headline-md text-headline-md text-on-surface">Program DKM As Salam</h2>
+          <p class="font-body-md text-body-md text-on-surface-variant">Ikuti dan dukung berbagai program dakwah dan
+            sosial kami.</p>
+        </div>
+        <a href="program.html" class="text-primary font-label-md text-label-md flex items-center gap-2 hover:underline">
+          Semua Program <span class="material-symbols-outlined text-sm">open_in_new</span>
+        </a>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-gutter">
+        <div class="md:col-span-2 group relative overflow-hidden rounded-xl h-80 bg-primary-container">
+          <img
+            class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110 opacity-60"
+            src="https://lh3.googleusercontent.com/aida-public/AB6AXuDqNd1JzDREH8q-DDlM0-p-nzKQgUwbL_56V7cHffgjhVsNm0slRwtl7tm0vmRvfVhBU-PmoTljbMsgiknefIGnDONRjFmZDnMXVb9Z5r_1HXfFckZw9OhLMFzgrTEMbe-kHNPsJxodcRw7K-uEyVHGlja18DgwFhRYJ405Ji90Sb1BjIG_W5MOXH_0tqY6o662MYt4_SqUS0pWgv5LJCwTjZOXdpsqeqYsgmW1Tq7EmdfxTMfrcId3WNSXHln9uWSKQ0_UrSqKEEXH" />
+          <div class="absolute bottom-0 left-0 p-8 text-on-primary">
+            <span
+              class="bg-secondary-container text-on-secondary-container text-[10px] uppercase font-bold px-2 py-1 rounded mb-4 inline-block">Dawah</span>
+            <h3 class="font-headline-sm text-headline-sm mb-2">Kajian Rutin Malam Jum'at</h3>
+            <p class="font-body-md text-body-md mb-4 max-w-md">Memperdalam pemahaman agama bersama di masjid setiap
+              Kamis malam.</p>
+            <button class="bg-white text-primary px-4 py-2 rounded font-label-md text-label-md">Daftar Hadir</button>
+          </div>
+        </div>
+
+        <div
+          class="bg-surface-container-lowest border border-outline-variant p-6 rounded-xl flex flex-col justify-between hover:shadow-md transition-shadow">
+          <div>
+            <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-4">
+              <span class="material-symbols-outlined">home_repair_service</span>
+            </div>
+            <h3 class="font-headline-sm text-headline-sm text-on-surface mb-2">Dana Kematian</h3>
+            <p class="font-body-md text-body-md text-on-surface-variant">Target meringankan shohibul musibah dalam
+              penyelenggaraan jenazah.</p>
+          </div>
+          <div class="mt-6">
+            <div class="flex justify-between text-label-sm mb-2">
+              <span>Terkumpul: Rp0</span>
+              <span>Target: Rpo</span>
+            </div>
+            <div class="w-full bg-surface-container rounded-full h-2">
+              <div class="bg-primary h-2 rounded-full" style="width: 50%"></div>
+            </div>
+            <a href="sedekah.html"
+              class="w-full mt-4 border border-primary text-primary py-2 rounded font-label-md text-label-md hover:bg-primary hover:text-on-primary transition-colors text-center"
+              style="text-decoration:none;display:block">Infaq Sekarang</a>
+          </div>
+        </div>
+
+        <div
+          class="bg-surface-container-lowest border border-outline-variant p-6 rounded-xl flex flex-col justify-between hover:shadow-md transition-shadow">
+          <div>
+            <div class="w-12 h-12 bg-secondary/10 rounded-full flex items-center justify-center text-secondary mb-4">
+              <span class="material-symbols-outlined">school</span>
+            </div>
+            <h3 class="font-headline-sm text-headline-sm text-on-surface mb-2">Pengajian Anak</h3>
+            <p class="font-body-md text-body-md text-on-surface-variant">Mengajarkan membaca Al Qur'an dan
+              pemahaman keislaman.</p>
+          </div>
+          <a href="sedekah.html"
+            class="w-full mt-4 border border-primary text-primary py-2 rounded font-label-md text-label-md hover:bg-primary hover:text-on-primary transition-colors text-center"
+            style="text-decoration:none;display:block">Infaq Sekarang</a>
+        </div>
+
+        <div class="md:col-span-2 group relative overflow-hidden rounded-xl h-60 bg-primary">
+          <img
+            class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110 opacity-50"
+            src="https://lh3.googleusercontent.com/aida-public/AB6AXuA6IhTtoXzrav89yMbuhd1K946W9uO9JLneLMPwIIC3EPIkJRLQM0ul9VjU2119ZGddyQxSeFBOCAppYckKRwDtR_sxADKbqyX2_tUwxVrIE062DKJEBGjIo8gZKatVpLBhbT6YaxRZRAYqNS79t1RahruL1yXGsCC4QVQOY0E11W4IUr7v97i0_2E1tDXrTzA_ffXyrixirkxAVV1Xel7-mchyWwZkaF-eWaMMPn4GYupZArUQMtMfvfteJu-Ku4PVUMREfG9Tj9o7" />
+          <div class="absolute inset-0 p-8 flex flex-col justify-end text-on-primary">
+            <h3 class="font-headline-sm text-headline-sm mb-2">Sedekah Subuh</h3>
+            <p class="font-body-md text-body-md max-w-lg">Penyediaan celengan sedekah subuh bagi jamaah dan warga
+              yang ingin bersedekah pada saat subuh.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Galeri Singkat (Asymmetric Grid) -->
+  <section class="py-stack-lg">
+    <div class="max-w-container-max mx-auto px-margin-desktop">
+      <h2 class="font-headline-md text-headline-md text-on-surface mb-stack-lg text-center">Aktivitas Terkini</h2>
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <div class="h-64 rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition-shadow">
+          <img class="w-full h-full object-cover"
+            src="https://lh3.googleusercontent.com/aida-public/AB6AXuBnKb4XkBDSv6CMw_xAaXbxZJDlOaGrEhAsjX-PIFzS_pWd4WiBYv5aquqlO3sn7GFuuQa8ez0xkXvn2Af4eb1uBpmIVpIVCL955NbwXemvA-2WvH5M_jXWKwOGEIzSlonAuzeHEiYi7bjFOOJgbgwrDXwwebz9LSAT25emXjDiTwtc14TeyePgSEyVrk4ePmV2LlthCjgyaKFsHSeQx1Zo_wux0TG02NVtzMXcJ8RxdtT5FNr-mGhNwymtnVjuX82QqqpPZ1A8C8oA" />
+        </div>
+        <div class="h-64 md:row-span-2 rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition-shadow">
+          <img class="w-full h-full object-cover"
+            src="https://lh3.googleusercontent.com/aida-public/AB6AXuByx22zzevlm9mK04dmvLZEJEZvBoj4Kp8P8csTrtyrCNNvVsVcXm5mSGaE39EFer3Y3oJwfOFcrLQoZyJ5OJBZfXEgR-_zjKrKglcklqCUM6-GsaLPIbyqxoQ_jUUr_PxS4s2UeKYSJo9ByvfsrI5IBey6PDJ5EVSGyFP_7VkzJW2C_DTAho-wInET6fONx9uP4UKYU9jNLzp-w8hhRLftKFdf8DSOg2uD7otPyGG2ECovvhUE5Ac0vqF55-HH34RHD-QPcCunMr68" />
+        </div>
+        <div class="h-64 rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition-shadow">
+          <img class="w-full h-full object-cover"
+            src="https://lh3.googleusercontent.com/aida-public/AB6AXuDJ-AHIhBnkeH3_I9ESlcJ9VpfTJAs-bQugBNh9CdG7HF2Vwa1e5Tyno38K7MR7pUOCj2jMCZtdeZ0UnEHerA2QBScwN28Iwt7_hzpakG2FPXYCyDj6l116V88z9-7qYnAbx32R7631oJub7haIxx5g4k1bzjVuPztF2zsGyRwbj_paPEa1QGOJVjMZCDAm60TWU6CS9J11yr43LTjSRrSZ9Zr7HWERnJDWT5gOEnSGbq9vt3RKqfhQBua-4Ciq_G67A4bXRUUp46Zl" />
+        </div>
+        <div class="h-64 rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition-shadow">
+          <img class="w-full h-full object-cover"
+            src="https://lh3.googleusercontent.com/aida-public/AB6AXuD3MZ0HHwUSKuCgp7RXIyQasEQcBn2pZcFo7nyD6s3zyy2gRXMJZlNLLoEOrM1AJM0pTXbyYM-2APR6I4M1dpf1Bac_OM660hlZjmU8rJANk3TPg-gdEpTsorZrcjOYioDd6DYPL0uMocVrZrLutx64j7lCny30f-AgRoFx5ppvhrTfvEfKhcxM6qj-9K6uvCS12H61pBab-Tpt6_pR_v8MijMmt9hwpsIVb34yUiRb_w9mmMOItQeseFWHDAn7GLQ-_TXnexZEIu8C" />
+        </div>
+        <div class="h-64 rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition-shadow">
+          <img class="w-full h-full object-cover"
+            src="https://lh3.googleusercontent.com/aida-public/AB6AXuBjtk769dfJDfiCVJBXSo3cMYzqMNVcmfXsMagzbw-fDr_Z66p1wKyjjjcWXl5R8ofTwsOK0fFMtylQNNBgYtIsvoPSai4de24LNTs0_rD21Qet0mPrUeBmJN884rw8GgQAIRW3z4Zz1oRN0tclLMEmbRqkCyD-HXXF6JeDYqxKbvX11azJTzhRzJn5zCg7XXGzx8NgHRJ3RtBZ5cV0SjuemtO2Cuw7TAybwqy3XKGH2K2VIstt7IFP_GS9kb_sNbbCMyHiglykOhPM" />
+        </div>
+        <div class="h-64 md:col-span-2 rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition-shadow">
+          <img class="w-full h-full object-cover"
+            src="https://lh3.googleusercontent.com/aida-public/AB6AXuAfyWbdHXZIzfqsAFdQIVtMlcEwF46BTgSHsTK_YYoIjQxlena1BsM-6vaAbMU2yBEp-QJsUXxgmDyeYrzavkIrVk3gXLVm5wQgVC6-TFM9z1npKudrpnAputppRBJld2TkVL_s1z7JaXzbKWC_auGD0bY6qAdWLXxcgLsZvTr8Y_NgOBPX5ZCkH7Yhx_DAtdyGNftCBFmu-bAi_ppcl0NzOFzdlz8vCmQXoa7nxh2mXw3HC_AhR2935Smx6pR7tTaD6dvt1SwHRoIq" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Sedekah -->
+  <section class="py-stack-lg relative overflow-hidden bg-secondary-container">
+    <div class="absolute top-0 right-0 p-24 opacity-10 pointer-events-none">
+      <span class="material-symbols-outlined text-[300px]"
+        style="font-variation-settings: 'FILL' 1;">volunteer_activism</span>
+    </div>
+    <div class="max-w-4xl mx-auto text-center px-margin-mobile relative z-10">
+      <h2 class="font-headline-md text-headline-md text-on-secondary-container mb-stack-sm">Zakat, Infak & Sedekah
+      </h2>
+      <p class="font-body-lg text-body-lg text-on-secondary-container/80 mb-stack-lg">
+        Harta tidak akan berkurang karena sedekah. Mari bersihkan harta dan raih keberkahan dengan berdonasi melalui
+        platform resmi Masjid Assalam.
+      </p>
+      <div class="flex flex-col md:flex-row gap-gutter justify-center items-center">
+        <div
+          class="bg-white/50 backdrop-blur-sm p-6 rounded-xl border border-white flex items-center gap-4 w-full md:w-auto">
+          <div class="text-secondary">
+            <span class="material-symbols-outlined text-4xl">account_balance</span>
+          </div>
+          <div class="text-left">
+            <p class="font-label-sm text-label-sm text-on-surface-variant">Bank Syariah Indonesia</p>
+            <p class="font-headline-sm text-headline-sm font-bold text-on-surface">712-345-6789</p>
+          </div>
+        </div>
+        <a href="sedekah.html"
+          class="bg-primary text-on-primary px-12 py-6 rounded-xl font-label-md text-label-md text-xl hover:shadow-2xl transition-all hover:scale-105 active:scale-95 w-full md:w-auto shadow-lg text-center"
+          style="text-decoration:none;display:inline-block">
+          Sedekah Sekarang
+        </a>
+      </div>
+      <p class="mt-8 font-label-sm text-label-sm text-on-secondary-container/60">Laporan audit keuangan diterbitkan
+        setiap bulan melalui halaman Kas.</p>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-surface-container-highest dark:bg-inverse-surface border-t-4 border-secondary-container">
+    <div class="grid grid-cols-1 md:grid-cols-12 gap-gutter px-margin-desktop py-stack-lg max-w-container-max mx-auto">
+      <div class="md:col-span-4">
+        <div class="font-headline-sm text-headline-sm text-on-surface dark:text-inverse-on-surface mb-stack-sm">Masjid
+          As Salam</div>
+        <p class="font-body-md text-body-md text-on-surface-variant mb-stack-md">
+          Perum Bumi Indah Proklamasi, Ds. Kalangsari Kec. Rengasdengklok Kab. Karawang 41352.
+        </p>
+        <div class="flex gap-4">
+          <a class="text-primary hover:opacity-80 transition-opacity" href="#"><span
+              class="material-symbols-outlined">face_nod</span></a>
+          <a class="text-primary hover:opacity-80 transition-opacity" href="#"><span
+              class="material-symbols-outlined">camera</span></a>
+          <a class="text-primary hover:opacity-80 transition-opacity" href="#"><span
+              class="material-symbols-outlined">video_library</span></a>
+        </div>
+      </div>
+      <div class="md:col-span-2">
+        <h4 class="font-label-md text-label-md font-bold mb-4">Navigasi</h4>
+        <ul class="space-y-2">
+          <li><a
+              class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary hover:underline transition-opacity"
+              href="index.html">Beranda</a></li>
+          <li><a
+              class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary hover:underline transition-opacity"
+              href="profil.html">Tentang Kami</a></li>
+          <li><a
+              class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary hover:underline transition-opacity"
+              href="program.html">Program</a></li>
+          <li><a
+              class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary hover:underline transition-opacity"
+              href="kontak.html">Kontak</a></li>
+        </ul>
+      </div>
+      <div class="md:col-span-3">
+        <h4 class="font-label-md text-label-md font-bold mb-4">Layanan</h4>
+        <ul class="space-y-2">
+          <li><a
+              class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary hover:underline transition-opacity"
+              href="kas.html">Laporan Kas</a></li>
+          <li><a
+              class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary hover:underline transition-opacity"
+              href="#">Konsultasi Agama</a></li>
+          <li><a
+              class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary hover:underline transition-opacity"
+              href="#">Pendaftaran Mualaf</a></li>
+          <li><a
+              class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary hover:underline transition-opacity"
+              href="#">Kebijakan Privasi</a></li>
+        </ul>
+      </div>
+      <div class="md:col-span-3">
+        <h4 class="font-label-md text-label-md font-bold mb-4">Jam Operasional</h4>
+        <p class="font-label-sm text-label-sm text-on-surface-variant mb-2">Buka 24 Jam untuk Ibadah</p>
+        <p class="font-label-sm text-label-sm text-on-surface-variant">Kantor DKM: 08:00 - 20:00 WIB</p>
+        <div class="mt-6 p-4 bg-white/20 rounded-lg border border-outline-variant/30">
+          <p class="font-label-sm text-label-sm">Butuh bantuan?</p>
+          <a class="text-primary font-bold hover:underline" href="tel:+6285711478180">+62 857 1147 8180</a>
+        </div>
+      </div>
+    </div>
+    <div class="px-margin-desktop py-4 bg-surface-container-highest/50 text-center">
+      <p class="font-label-sm text-label-sm text-on-surface-variant">© 2026 Masjid As Salam. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="config.js"></script>
+  <script src="api.js"></script>
+  <script src="script.js"></script>
+</body>
+
+</html>
