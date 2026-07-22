@@ -1,0 +1,9 @@
+# Railway: https://railway.app → New Project → Deploy from GitHub
+# Repo: kumabear-hdd/Masjid — set env vars di dashboard (lihat README)
+[build]
+builder = "NIXPACKS"
+
+[deploy]
+startCommand = "npm start"
+healthcheckPath = "/api/health"
+restartPolicyType = "ON_FAILURE"

@@ -1,0 +1,11 @@
+node_modules
+data
+.git
+.zcode
+.env
+*.db
+*.db-*
+server/uploads/*
+!server/uploads/.gitkeep
+npm-debug.log
+README.md

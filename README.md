@@ -80,10 +80,12 @@ NODE_ENV=development
 │   ├── bootstrap.js
 │   ├── auth.js
 │   ├── seed.js
-│   ├── uploads/      # Bukti transfer (lokal)
+│   ├── uploads/
 │   └── routes/
-├── data/             # masjid.db (dibuat otomatis)
-├── render.yaml       # Blueprint Render
+├── data/
+├── Dockerfile
+├── railway.toml
+├── render.yaml
 ├── Procfile
 ├── package.json
 └── .env
@@ -106,43 +108,76 @@ NODE_ENV=development
 | GET/PUT | `/api/kas` | Baca / update kas |
 | GET | `/api/health` | Health check |
 
-## Deploy ke Render (disarankan)
+---
 
-Aplikasi ini butuh **Node.js long-running** + filesystem untuk SQLite & upload — **bukan** Netlify static.
+## Deploy gratis (gampang seperti Netlify)
 
-### Opsi A — Blueprint (paling cepat)
+Aplikasi ini **Node + SQLite**, jadi **Netlify/Vercel static tidak cocok**.  
+Pilih host yang menjalankan `npm start` 24 jam (bukan cuma HTML).
 
-1. Push kode ke GitHub (`kumabear-hdd/Masjid`)
-2. Buka [https://dashboard.render.com](https://dashboard.render.com) → **New** → **Blueprint**
-3. Hubungkan repo **Masjid** (ada `render.yaml`)
-4. Isi env `ADMIN_PASSWORD` (dan ganti email bank jika perlu)
-5. Deploy → tunggu build → buka URL `https://….onrender.com`
+### 1) Railway — paling mirip “import GitHub → live” (rekomendasi free mudah)
 
-### Opsi B — Web Service manual
+1. Buka [https://railway.app](https://railway.app) → login dengan **GitHub**
+2. **New Project** → **Deploy from GitHub repo** → pilih **Masjid**
+3. Railway deteksi Node otomatis (`railway.toml` + `npm start`)
+4. Tab **Variables** → tambah:
 
-1. **New** → **Web Service** → pilih repo Masjid
-2. Runtime: **Node**
-3. Build: `npm install`
-4. Start: `npm start`
-5. Health check path: `/api/health`
-6. Environment:
-   - `NODE_ENV=production`
-   - `SESSION_SECRET` = string acak panjang
-   - `ADMIN_EMAIL` / `ADMIN_PASSWORD` / `ADMIN_NAME`
-   - `BANK_NAME` / `BANK_ACCOUNT` / `BANK_HOLDER`
-7. (Disarankan, plan berbayar) **Disk** mount ke `/var/data`, lalu set:
-   - `DATA_DIR=/var/data`
-   - `UPLOADS_DIR=/var/data/uploads`  
-   Tanpa disk, SQLite & bukti transfer **hilang** setiap redeploy (free tier ephemeral).
+| Key | Value |
+|-----|--------|
+| `NODE_ENV` | `production` |
+| `SESSION_SECRET` | string acak panjang (contoh: acak di password manager) |
+| `ADMIN_EMAIL` | `admin@assalam.com` |
+| `ADMIN_PASSWORD` | **password kuat milikmu** |
+| `ADMIN_NAME` | `Administrator Masjid` |
+| `BANK_NAME` | `BSI` |
+| `BANK_ACCOUNT` | nomor rekening masjid |
+| `BANK_HOLDER` | `Masjid Assalam` |
 
-### Setelah live
-- Publik: `https://YOUR-APP.onrender.com`
-- Admin: `https://YOUR-APP.onrender.com/login.html`
-- Free tier Render **sleep** setelah idle ~15 menit (request pertama bisa lambat).
+5. **Settings** → **Networking** → **Generate Domain** → dapat URL `https://….up.railway.app`
+6. Tunggu deploy **Success** → buka URL + `/login.html` untuk admin
 
-### Alternatif host
-- **Railway** / **Fly.io** / VPS: `npm install` → set env → `npm start` (listen `0.0.0.0:$PORT`)
-- **Netlify**: tidak cocok untuk Express + SQLite + upload
+**Catatan free Railway:** trial ~$5 (30 hari), lalu kredit kecil bulanan. Untuk masjid hobby biasanya cukup. Volume/disk opsional biar data SQLite tidak hilang.
+
+### 2) Render Free — gratis tanpa kartu (boleh sleep)
+
+1. [https://dashboard.render.com](https://dashboard.render.com) → **New** → **Blueprint** (atau Web Service)
+2. Hubungkan repo **Masjid**
+3. Build: `npm install` · Start: `npm start` · Health: `/api/health`
+4. Isi env sama seperti tabel di atas
+5. URL: `https://….onrender.com`
+
+**Gratis**, tapi sleep ~15 menit idle (request pertama lambat). Data file hilang saat redeploy kecuali pakai Disk berbayar.
+
+### 3) Replit — sangat mudah lewat browser (gratis)
+
+1. Buka [https://replit.com](https://replit.com) → **Import from GitHub** → `kumabear-hdd/Masjid`
+2. **Run** / set run command: `npm install && npm start`
+3. Secrets (env) sama seperti tabel Variables di atas
+4. **Deploy** / Publish web (sesuai UI Replit)
+
+Cocok kalau tidak mau pusing CLI. Free tier ada batasan always-on.
+
+### 4) Glitch — free remix
+
+1. [https://glitch.com](https://glitch.com) → **New project** → **Import from GitHub**
+2. Repo: `https://github.com/kumabear-hdd/Masjid`
+3. Di `.env` (Glitch secrets) isi env production
+4. Start command default: `npm start`
+
+Free project bisa sleep / dibatasi traffic.
+
+### Yang **tidak** dipakai
+| Platform | Alasan |
+|----------|--------|
+| **Netlify** | Static/Functions — Express + SQLite + upload file tidak stabil |
+| **GitHub Pages** | Hanya static HTML, tanpa API |
+
+### Setelah live (semua host)
+- Publik: `https://DOMAIN-KAMU/`
+- Admin: `https://DOMAIN-KAMU/login.html`
+- Cek sehat: `https://DOMAIN-KAMU/api/health` → `{"ok":true,...}`
+
+**Penting data:** di free tier, file SQLite & bukti transfer sering **ephemeral** (hilang redeploy/sleep). Untuk data penting, nanti pindah ke plan dengan volume/disk atau Postgres.
 
 ## Catatan fase 1
 - Pembayaran **manual** (bukan Midtrans/Xendit). Gateway otomatis bisa ditambah nanti.
