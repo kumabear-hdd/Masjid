@@ -179,6 +179,51 @@ Free project bisa sleep / dibatasi traffic.
 
 **Penting data:** di free tier, file SQLite & bukti transfer sering **ephemeral** (hilang redeploy/sleep). Untuk data penting, nanti pindah ke plan dengan volume/disk atau Postgres.
 
+
+## Deploy ke Netlify (`*.netlify.app`) — frontend gratis
+
+Netlify **bisa** mem-publish folder `public/` ke domain gratis `https://nama-situs.netlify.app`.
+
+**Batasan penting:** Netlify **tidak** menjalankan Express + SQLite + upload file. Jadi:
+
+| Yang jalan di Netlify saja | Yang butuh backend (Railway/Render) |
+|----------------------------|-------------------------------------|
+| Tampilan halaman (HTML/CSS) | Sedekah online (simpan donasi) |
+| Navigasi, profil, kontak | Login & panel admin |
+| Jadwal/kas **dinamis** | Verifikasi donasi, update saldo |
+
+### Langkah cepat — tampilan website di Netlify
+
+1. Buka [https://app.netlify.com](https://app.netlify.com) → login (boleh pakai GitHub)
+2. **Add new site** → **Import an existing project** → pilih GitHub → repo **Masjid**
+3. Pengaturan build:
+   - **Branch:** `main`
+   - **Build command:** biarkan kosong (atau biarkan dari `netlify.toml`)
+   - **Publish directory:** `public`
+4. **Deploy site** → tunggu selesai
+5. Dapat URL: `https://random-name-123.netlify.app`  
+   (bisa diganti di Site configuration → Domain management → Options → Edit site name)
+
+File `netlify.toml` di repo sudah set `publish = "public"`.
+
+### Supaya sedekah + admin juga jalan (Netlify + Railway)
+
+1. Deploy backend dulu di **Railway** (lihat bagian Railway di atas) → dapat URL mis. `https://masjid-xxx.up.railway.app`
+2. Edit `netlify.toml` di repo: **buka komentar** blok `[[redirects]]` dan ganti URL Railway kamu
+3. Commit & push → Netlify redeploy otomatis
+4. Website di Netlify akan meneruskan `/api/*` ke Railway (proxy)
+
+Alternatif tanpa edit redirect: di `public/site-config.js` set  
+`window.MASJID_API_BASE = "https://masjid-xxx.up.railway.app";`  
+(login admin lewat cookie lintas-domain bisa bermasalah; proxy di netlify.toml lebih andal).
+
+### Deploy drag-and-drop (tanpa Git)
+
+1. Buka [https://app.netlify.com/drop](https://app.netlify.com/drop)
+2. Seret folder **`public`** (bukan folder project utuh) ke halaman itu
+3. Selesai — dapat URL `.netlify.app`  
+   (update manual tiap kali ganti file)
+
 ## Catatan fase 1
 - Pembayaran **manual** (bukan Midtrans/Xendit). Gateway otomatis bisa ditambah nanti.
 - Tidak ada login jamaah.

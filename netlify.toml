@@ -1,0 +1,29 @@
+# Deploy frontend ke Netlify (gratis → *.netlify.app)
+#
+# Publish folder = public/
+# API Express+SQLite TIDAK jalan di Netlify static sendiri.
+#
+# Cara di dashboard Netlify:
+#   New site → Import from Git → repo Masjid
+#   Build command: (kosongkan)
+#   Publish directory: public
+#
+# Agar sedekah/admin jalan: deploy backend di Railway, lalu buka
+# komentar [[redirects]] di bawah dan ganti URL backend.
+
+[build]
+  publish = "public"
+  command = "echo Static site ready"
+
+# --- OPSI: proxy API ke Railway (uncomment & ganti URL) ---
+# [[redirects]]
+#   from = "/api/*"
+#   to = "https://GANTI-URL-RAILWAY-KAMU.up.railway.app/api/:splat"
+#   status = 200
+#   force = true
+#
+# [[redirects]]
+#   from = "/uploads/*"
+#   to = "https://GANTI-URL-RAILWAY-KAMU.up.railway.app/uploads/:splat"
+#   status = 200
+#   force = true

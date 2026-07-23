@@ -1,4 +1,11 @@
 // Shared API helpers for Masjid Assalam
+function apiUrl(path) {
+  const base = (typeof window !== 'undefined' && window.MASJID_API_BASE) || '';
+  const p = path.startsWith('/') ? path : '/' + path;
+  if (!base) return p;
+  return String(base).replace(/\/$/, '') + p;
+}
+
 const API = {
   async request(path, options = {}) {
     const opts = {
@@ -16,7 +23,7 @@ const API = {
       opts.body = JSON.stringify(opts.body);
     }
 
-    const res = await fetch(path, opts);
+    const res = await fetch(apiUrl(path), opts);
     let data = null;
     try {
       data = await res.json();
@@ -25,7 +32,7 @@ const API = {
     }
 
     if (!res.ok) {
-      const err = new Error((data && data.error) || `Request failed (${res.status})`);
+      const err = new Error((data && data.error) || 'Request failed (' + res.status + ')');
       err.status = res.status;
       err.data = data;
       throw err;
