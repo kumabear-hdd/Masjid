@@ -68,10 +68,15 @@ document.addEventListener('DOMContentLoaded', () => {
       amount = parseNominal(selectedBtn.textContent);
     }
 
-    const nameInput = form.querySelector('[name="donor_name"]') || form.querySelector('input[placeholder*="nama" i]');
-    const waInput = form.querySelector('[name="whatsapp"]') || form.querySelector('input[type="tel"]');
-    const emailInput = form.querySelector('[name="email"]') || form.querySelector('input[type="email"]');
-    const msgInput = form.querySelector('[name="message"]') || form.querySelector('textarea');
+    const nameInput =
+      form.querySelector('[name="donor_name"]') ||
+      form.querySelector('input[placeholder*="nama" i]');
+    const waInput =
+      form.querySelector('[name="whatsapp"]') || form.querySelector('input[type="tel"]');
+    const emailInput =
+      form.querySelector('[name="email"]') || form.querySelector('input[type="email"]');
+    const msgInput =
+      form.querySelector('[name="message"]') || form.querySelector('textarea');
     const anon = form.querySelector('#anonim');
     const methodEl = form.querySelector('input[name="payment_method"]:checked');
 
@@ -80,7 +85,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const whatsapp = waInput ? waInput.value.trim() : '';
     const email = emailInput ? emailInput.value.trim() : '';
     const message = msgInput ? msgInput.value.trim() : '';
-    const method = methodEl ? methodEl.value : '';
+    // Normalisasi: qris | bank (HTML value sudah benar; jaga-jaga dari label)
+    let method = methodEl ? String(methodEl.value || '').trim().toLowerCase() : '';
+    if (method === 'transfer' || method === 'rekening' || method === 'tf') {
+      method = 'bank';
+    }
 
     if (!amount || amount < 1000) {
       alert('Silakan pilih atau isi nominal minimal Rp 1.000.');
@@ -90,8 +99,8 @@ document.addEventListener('DOMContentLoaded', () => {
       alert('Nama lengkap wajib diisi (atau centang Anonim).');
       return;
     }
-    if (!method) {
-      alert('Silakan pilih metode pembayaran.');
+    if (!method || !['qris', 'bank'].includes(method)) {
+      alert('Silakan pilih metode pembayaran (QRIS atau Transfer Bank).');
       return;
     }
 
@@ -112,19 +121,27 @@ document.addEventListener('DOMContentLoaded', () => {
         message,
         method,
       });
-      window.location.href = 'payment.html?code=' + encodeURIComponent(res.data.code);
+
+      const code = res && res.data && res.data.code;
+      if (!code) {
+        throw new Error('Server tidak mengembalikan kode donasi. Coba lagi.');
+      }
+
+      // Absolute path agar aman di Railway / subpath
+      window.location.assign(
+        (window.location.pathname.replace(/[^/]*$/, '') || '/') +
+          'payment.html?code=' +
+          encodeURIComponent(code)
+      );
     } catch (err) {
-      let msg = err.message || 'Gagal membuat donasi.';
-      if (err.status === 404 || /404/.test(msg)) {
+      let msg = (err && err.message) || 'Gagal membuat donasi.';
+      if (err && (err.status === 404 || /404/.test(msg))) {
         msg =
-          'Server sedekah belum terhubung.
-
-' +
-          'Situs di Netlify hanya menampilkan halaman. ' +
-          'Form sedekah butuh backend (Railway/Render).
-
-' +
-          'Jalankan lokal: npm start di laptop, atau hubungkan API backend ke Netlify (lihat README).';
+          'Server sedekah belum terhubung.\n\n' +
+          'Situs statis (Netlify) tidak punya API. ' +
+          'Gunakan URL Railway penuh, atau hubungkan proxy /api (lihat README).';
+      } else if (err && err.status === 400) {
+        msg = (err.data && err.data.error) || msg;
       }
       alert(msg);
       if (btn) {
