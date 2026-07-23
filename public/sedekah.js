@@ -114,7 +114,19 @@ document.addEventListener('DOMContentLoaded', () => {
       });
       window.location.href = 'payment.html?code=' + encodeURIComponent(res.data.code);
     } catch (err) {
-      alert(err.message || 'Gagal membuat donasi.');
+      let msg = err.message || 'Gagal membuat donasi.';
+      if (err.status === 404 || /404/.test(msg)) {
+        msg =
+          'Server sedekah belum terhubung.
+
+' +
+          'Situs di Netlify hanya menampilkan halaman. ' +
+          'Form sedekah butuh backend (Railway/Render).
+
+' +
+          'Jalankan lokal: npm start di laptop, atau hubungkan API backend ke Netlify (lihat README).';
+      }
+      alert(msg);
       if (btn) {
         btn.disabled = false;
         btn.innerHTML = original;
